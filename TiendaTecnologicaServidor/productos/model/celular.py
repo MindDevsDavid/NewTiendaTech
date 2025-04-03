@@ -2,7 +2,7 @@ from datetime import datetime
 from .producto_tecnologico import ProductoTecnologico
 from ..interfaces.iencender import ICelular
 from django.utils import timezone
-import pytz
+
 
 class Celular(ProductoTecnologico, ICelular):
     def __init__(self, sku, nombre, descripcion, precio, stock, marca, capacidad, fechaLanzamiento, fechaRegistro=None, is_new=True):

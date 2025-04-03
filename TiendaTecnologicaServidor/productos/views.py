@@ -16,6 +16,7 @@ def create_celular(request):
     Crea un celular a partir de datos JSON en el cuerpo de la petición.
     Ejemplo de JSON:
     {
+      "sku": "SAMS20-BLACK",
       "nombre": "Samsung S20",
       "descripcion": "Celular gama alta",
       "precio": 2000,
@@ -26,8 +27,6 @@ def create_celular(request):
       "is_new": true
     }
     """
-
-    
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError:
@@ -42,13 +41,19 @@ def create_celular(request):
     capacidad = data.get("capacidad")
     fecha = data.get("fechaLanzamiento")
     is_new = data.get("is_new", True)  # Por defecto True
-    
 
     # Validar datos mínimos
     if not sku or not nombre or precio is None or stock is None:
         return JsonResponse({"error": "Campos obligatorios faltantes"}, status=400)
 
-    # Usamos el método de controlador
+    # (// NUEVO) Verificamos si ya existe un celular con ese SKU
+    celular_existente = controlador.buscar_producto(sku)
+    if celular_existente is not None:
+        # Si ya existe, retornamos un error
+        return JsonResponse({"error": f"Ya existe un celular con el SKU '{sku}'"}, status=400)
+        # (Podrías usar status=409 Conflict si prefieres)
+
+    # Si no existe, procedemos a crear
     controlador.agregar_producto(sku, nombre, descripcion, precio, stock, marca, capacidad, fecha, is_new)
     return JsonResponse({"message": "Celular creado con exito"}, status=201)
 
@@ -128,18 +133,23 @@ def update_celular(request, sku):
       "nombre": "Samsung S22 PLUS",
       "precio": 3000,
       "stock": 5,
+      "marca": "Samsung",
       ...
     }
-    El 'sku' no se actualiza, es inmutable.
+    El 'sku' no se actualiza (es inmutable).
     """
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError:
         return JsonResponse({"error": "JSON inválido"}, status=400)
 
-    # NUEVO: Leemos 'nombre' para actualizarlo.
-    nuevo_nombre = data.get("nombre")
+    # 1. Verificar si el celular con ese SKU existe
+    celular_obj = controlador.buscar_producto(sku)
+    if celular_obj is None:
+        return JsonResponse({"error": f"No se encontró el celular con SKU '{sku}'"}, status=404)
 
+    # 2. Extraer campos a actualizar (si existen en el JSON)
+    nuevo_nombre = data.get("nombre")
     nuevo_precio = data.get("precio")
     nueva_descripcion = data.get("descripcion")
     nuevo_stock = data.get("stock")
@@ -148,6 +158,7 @@ def update_celular(request, sku):
     nueva_fecha_lanzamiento = data.get("fechaLanzamiento")
     es_nuevo = data.get("is_new")
 
+    # 3. Llamar al controlador para efectuar la actualización
     controlador.actualizar_celular(
         sku,
         nuevo_nombre=nuevo_nombre,
@@ -160,7 +171,9 @@ def update_celular(request, sku):
         es_nuevo=es_nuevo
     )
 
+    # 4. Responder éxito
     return JsonResponse({"message": f"Celular '{sku}' actualizado."}, status=200)
+
 
 
 @csrf_exempt
