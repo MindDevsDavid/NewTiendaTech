@@ -4,7 +4,7 @@ class ControladorTienda:
     def __init__(self, productos):
         self.productos = productos
 
-    def agregar_producto(self, sku, nombre, descripcion, precio, stock, marca, capacidad, fechaLanzamiento, is_new=True):
+    def agregar_producto(self, sku, nombre, descripcion, precio, stock, marca, capacidad, fechaLanzamiento, fechaRegistro=None, is_new=True):
         """
         Crea un Celular y lo agrega a self.productos. 
         is_new indica si el celular es nuevo (True) o reacondicionado (False).
@@ -12,7 +12,7 @@ class ControladorTienda:
         """
         try:
             # Aquí pasamos is_new al constructor de Celular:
-            celular = Celular(sku, nombre, descripcion, precio, stock, marca, capacidad, fechaLanzamiento, is_new)
+            celular = Celular(sku, nombre, descripcion, precio, stock, marca, capacidad, fechaLanzamiento,  is_new=is_new, fechaRegistro=fechaRegistro)
             self.productos.append(celular)
         except ValueError as e:
             print(e)
@@ -37,7 +37,7 @@ class ControladorTienda:
         Busca en la lista self.productos por 'sku' en lugar de 'nombre'.
         """
         for prod in self.productos:
-            if prod.get_sku() == sku:   # (// NUEVO)
+            if prod.get_sku() == sku:   
                 return prod
         return None
 

@@ -42,7 +42,7 @@ def create_celular(request):
     capacidad = data.get("capacidad")
     fecha = data.get("fechaLanzamiento")
     is_new = data.get("is_new", True)  # Por defecto True
-   
+    
 
     # Validar datos mínimos
     if not sku or not nombre or precio is None or stock is None:
@@ -64,6 +64,12 @@ def list_celulares(request):
     
     resultado = []
     for prod in controlador.productos:
+        # Formatea la fecha para JSON si es un objeto datetime
+        fecha_registro = prod.get_fechaRegistro()
+        if hasattr(fecha_registro, 'strftime'):
+            fecha_str = fecha_registro.strftime("%Y-%m-%d %H:%M:%S %Z")
+        else:
+            fecha_str = str(fecha_registro)
         # Convertimos el objeto a dict
         item = {
             "nombre": prod.get_nombre(),
@@ -74,6 +80,7 @@ def list_celulares(request):
             "marca": prod.get_marca(),
             "capacidad": prod.get_capacidad(),
             "fechaLanzamiento": prod.get_fechaLanzamiento(),
+            "fechaRegistro": fecha_str,
             "isNew": getattr(prod, "is_new", True),  # si no existe, asume True
             "precio Con Iva": prod.calcularPrecio()
         }
@@ -86,6 +93,14 @@ def get_celular_by_sku(request, sku):
     producto = controlador.buscar_producto(sku)
     if producto is None:
         return JsonResponse({"error": "No se encontró celular con ese SKU"}, status=404)
+    
+# Formatea la fecha para JSON si es un objeto datetime
+    fecha_registro = producto.get_fechaRegistro()
+    if hasattr(fecha_registro, 'strftime'):
+        fecha_str = fecha_registro.strftime("%Y-%m-%d %H:%M:%S %Z")
+    else:
+        fecha_str = str(fecha_registro)
+        # Convertimos el objeto a dict
 
     # Retorna todos los atributos
     item = {
@@ -97,6 +112,7 @@ def get_celular_by_sku(request, sku):
         "marca": producto.get_marca(),
         "capacidad": producto.get_capacidad(),
         "fechaLanzamiento": producto.get_fechaLanzamiento(),
+        "fechaRegistro": fecha_str,
         "isNew": getattr(producto, "is_new", True),
         "precioConIva": producto.calcularPrecio()
     }
@@ -174,7 +190,15 @@ def buscar_por_marca(request):
     # Creamos método en el controlador (o lo definimos inline):
     resultado = []
     for prod in controlador.productos:
+        # Formatea la fecha para JSON si es un objeto datetime
+        fecha_registro = prod.get_fechaRegistro()
+        if hasattr(fecha_registro, 'strftime'):
+            fecha_str = fecha_registro.strftime("%Y-%m-%d %H:%M:%S %Z")
+        else:
+            fecha_str = str(fecha_registro)
+        
         if prod.get_marca().lower() == marca.lower():
+            
             item = {
             "nombre": prod.get_nombre(),
             "sku": prod.get_sku(),
@@ -184,6 +208,7 @@ def buscar_por_marca(request):
             "marca": prod.get_marca(),
             "capacidad": prod.get_capacidad(),
             "fechaLanzamiento": prod.get_fechaLanzamiento(),
+            "fechaRegistro": fecha_str,
             "isNew": getattr(prod, "is_new", True),  # si no existe, asume True
             "precio Con Iva": prod.calcularPrecio()
         }
@@ -207,6 +232,13 @@ def buscar_por_rango_precio(request):
 
     resultado = []
     for prod in controlador.productos:
+        # Formatea la fecha para JSON si es un objeto datetime
+        fecha_registro = prod.get_fechaRegistro()
+        if hasattr(fecha_registro, 'strftime'):
+            fecha_str = fecha_registro.strftime("%Y-%m-%d %H:%M:%S %Z")
+        else:
+            fecha_str = str(fecha_registro)
+        # Convertimos el objeto a dict
         precio_base = prod.get_precio()
         if minimo <= precio_base <= maximo:
             item = {
@@ -218,6 +250,7 @@ def buscar_por_rango_precio(request):
             "marca": prod.get_marca(),
             "capacidad": prod.get_capacidad(),
             "fechaLanzamiento": prod.get_fechaLanzamiento(),
+            "fechaRegistro": fecha_str,
             "isNew": getattr(prod, "is_new", True),  # si no existe, asume True
             "precio Con Iva": prod.calcularPrecio()
         }
