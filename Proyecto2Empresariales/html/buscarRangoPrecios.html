@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Buscar Celular por Rango de Precios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col mt-3">
+            <h1>TiendaTech - Buscar Celular por Rango de Precios</h1>
+        </div>
+    </div>
+
+    <!-- Buscador por Rango de Precios -->
+    <div class="row mt-3">
+        <div class="col-12 col-md-6 offset-md-3">
+            <input type="number" id="precioMin" class="form-control" placeholder="Precio mínimo..." min="0">
+            <input type="number" id="precioMax" class="form-control mt-2" placeholder="Precio máximo..." min="0">
+            <button class="btn btn-primary mt-2 w-100" id="btnBuscar">Buscar</button>
+        </div>
+    </div>
+
+    <!-- Mensaje de error -->
+    <div class="row mt-3">
+        <div class="col-12 text-center">
+            <p id="mensaje-error" class="text-danger fw-bold" style="display: none;"></p>
+        </div>
+    </div>
+
+    <!-- Tabla de celulares -->
+    <div class="row mt-3" id="contenedor-tabla" style="display: none;">
+        <div class="col-12">
+            <h3>Resultados de la búsqueda</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Sku</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Marca</th>
+                        <th>Capacidad</th>
+                        <th>Fecha de lanzamiento</th>
+                        <th>¿Es nuevo?</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-tabla">
+                    <!-- Celulares filtrados se insertarán aquí -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Botón Volver -->
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <button class="btn btn-secondary" onclick="volverAlMenu()">Volver al Menú</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector("#btnBuscar").addEventListener("click", buscarCelularesPorRango);
+    });
+
+    const buscarCelularesPorRango = async () => {
+        let precioMin = document.querySelector("#precioMin").value.trim();
+        let precioMax = document.querySelector("#precioMax").value.trim();
+        let mensajeError = document.querySelector("#mensaje-error");
+        let contenedorTabla = document.querySelector("#contenedor-tabla");
+        let cuerpoTabla = document.querySelector("#cuerpo-tabla");
+
+        // Limpiar la tabla y el mensaje antes de la búsqueda
+        cuerpoTabla.innerHTML = "";
+        mensajeError.style.display = "none";
+        contenedorTabla.style.display = "none";
+
+        // Validar entrada
+        if (!precioMin || !precioMax) {
+            alert("Por favor, ingrese ambos valores de precio.");
+            return;
+        }
+
+        if (Number(precioMin) < 0 || Number(precioMax) < 0) {
+            alert("Los precios no pueden ser negativos.");
+            return;
+        }
+
+        if (Number(precioMin) > Number(precioMax)) {
+            alert("El precio mínimo no puede ser mayor que el precio máximo.");
+            return;
+        }
+
+        try {
+            let response = await fetch(`http://127.0.0.1:8000/celulares/buscar-por-precio?min=${precioMin}&max=${precioMax}`);
+            let data = await response.json();
+
+            console.log("Respuesta del servidor:", data); // Depuración
+
+            if (response.ok && data.length > 0) {
+                // Se encontraron celulares
+                data.forEach(celular => {
+                    const fila = document.createElement("tr");
+
+                    fila.innerHTML = `
+                        <td>${celular.sku}</td>
+                        <td>${celular.nombre}</td>
+                        <td>${celular.descripcion}</td>
+                        <td>${celular.precio}</td>
+                        <td>${celular.stock}</td>
+                        <td>${celular.marca}</td>
+                        <td>${celular.capacidad}</td>
+                        <td>${celular.fechaLanzamiento}</td>
+                        <td>${celular.isNew ? "Sí" : "No"}</td>
+                    `;
+
+                    cuerpoTabla.appendChild(fila);
+                });
+
+                contenedorTabla.style.display = "block"; // Mostrar la tabla con los datos
+
+            } else {
+                // No se encontraron celulares en ese rango
+                mensajeError.textContent = "No se encontraron celulares en este rango de precios.";
+                mensajeError.style.display = "block";
+            }
+
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+            mensajeError.textContent = "Error al conectar con el servidor.";
+            mensajeError.style.display = "block";
+        }
+    };
+
+    // Función para volver al menú de búsqueda
+    const volverAlMenu = () => {
+        window.location.href = "menuBuscar.html";
+    };
+</script>
+
+</body>
+</html>
