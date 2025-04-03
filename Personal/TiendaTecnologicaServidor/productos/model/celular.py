@@ -2,7 +2,7 @@ from .producto_tecnologico import ProductoTecnologico
 from ..interfaces.iencender import ICelular
 
 class Celular(ProductoTecnologico, ICelular):
-    def __init__(self, nombre, descripcion, precio, stock, marca, capacidad, fechaLanzamiento, is_new=True):
+    def __init__(self, sku, nombre, descripcion, precio, stock, marca, capacidad, fechaLanzamiento, is_new=True):
         """
         is_new (bool): Indica si el celular es nuevo (True) o reacondicionado (False).
         Por defecto, asumimos que es nuevo (True).
@@ -11,17 +11,23 @@ class Celular(ProductoTecnologico, ICelular):
         self.set_capacidad(capacidad)
         self.set_fechaLanzamiento(fechaLanzamiento)
         self.set_is_new(is_new)
+        self.set_sku(sku)
 
     def __str__(self):
         base_str = super().__str__()
         extra_info = (f"\nCapacidad: {self.capacidad}\n"
                       f"Fecha de lanzamiento: {self.fechaLanzamiento}\n"
-                      f"¿Es nuevo?: {self.is_new}\n")
+                      f"¿Es nuevo?: {self.is_new}\n"
+                      f"SKU: {self.sku}\n"
+                      )
         return base_str + extra_info
 
     # GETTERS
     def get_nombre(self):
         return self.nombre
+    
+    def get_sku(self):
+        return self.sku
 
     def get_descripcion(self):
         return self.descripcion
@@ -45,6 +51,15 @@ class Celular(ProductoTecnologico, ICelular):
         return self.is_new
 
     # SETTERS
+
+    def set_sku(self, sku):
+        """
+        Asigna un SKU. Podrías agregar validaciones (e.g. no vacío).
+        """
+        if not sku:
+            raise ValueError("El SKU no puede ser vacío")
+        self.sku = sku
+
     def set_marca(self, marca):
         self.marca = marca
 

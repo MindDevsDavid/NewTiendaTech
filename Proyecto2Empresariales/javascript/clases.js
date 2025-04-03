@@ -1,12 +1,13 @@
 export class Cel{
-    constructor(nombre, descripcion, stock, marca, precio, fecha_lanzamiento, capacidad, is_new){
+    constructor(sku, nombre, descripcion, precio, stock, marca, capacidad, fecha_lanzamiento, is_new){
+        this.sku
         this.nombre = nombre
         this.descripcion = descripcion
-        this.stock = stock
-        this.marca = marca
         this.precio = precio
-        this.fecha_lanzamiento = fecha_lanzamiento,
-        this.capacidad = capacidad,
-        this.is_new = is_new
+        this.stock = stock
+        this.marca = marca        
+        this.capacidad = capacidad
+        this.fecha_lanzamiento = fecha_lanzamiento
+        this.is_new       
     }
 }
