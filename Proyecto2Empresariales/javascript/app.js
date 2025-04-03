@@ -21,7 +21,6 @@ window.mostrarModal = (id) => {
         document.querySelector("#precioCelModal").value = datos[index].precio;
         document.querySelector("#fechaCelModal").value = datos[index].fecha_lanzamiento;
         document.querySelector("#capacidadCelModal").value = datos[index].capacidad;
-        document.querySelector("#is_new").value = datos[index].is_new
 
         myModal.show();
     }
@@ -101,7 +100,6 @@ const agregarCel = async (event) => {
     let marca = document.querySelector("#marcaCel").value;
     let capacidad = 1000;   
     let fecha_lanzamiento = document.querySelector("#fechaCel").value;
-    let is_new = document.querySelector("#is_new").value === "true";
 
 
     let nuevoCelular = {
@@ -112,8 +110,7 @@ const agregarCel = async (event) => {
         stock: parseInt(stock),  // Convertimos a número si es necesario
         marca,
         capacidad,
-        fechaLanzamiento: fecha_lanzamiento,  // ✅ Cambiado a camelCase
-        is_new
+        fechaLanzamiento: fecha_lanzamiento
     };
 
     try {

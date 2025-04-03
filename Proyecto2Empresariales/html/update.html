@@ -63,10 +63,7 @@
                     <label class="form-label">Fecha de lanzamiento</label>
                     <input type="text" class="form-control" id="fechaLanzamiento">
                 </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="isNew">
-                    <label class="form-check-label">¿Es nuevo?</label>
-                </div>
+               
                 <button type="submit" class="btn btn-success w-100">Actualizar</button>
             </form>
         </div>
@@ -120,7 +117,7 @@
                 document.querySelector("#marca").value = data.marca;
                 document.querySelector("#capacidad").value = data.capacidad;
                 document.querySelector("#fechaLanzamiento").value = data.fechaLanzamiento;
-                document.querySelector("#isNew").checked = data.isNew;
+                
 
                 contenedorFormulario.style.display = "block"; // Mostrar formulario
             } else {
@@ -147,7 +144,6 @@
     let marca = document.querySelector("#marca").value.trim();
     let capacidad = document.querySelector("#capacidad").value;
     let fechaLanzamiento = document.querySelector("#fechaLanzamiento").value.trim();
-    let isNew = document.querySelector("#isNew").checked;
 
     if (!skuActual) {
         alert("Debes buscar un celular antes de actualizar.");
@@ -162,8 +158,7 @@
         stock: parseInt(stock),
         marca,
         capacidad: parseInt(capacidad),  // Asegura que sea un número
-        fechaLanzamiento,
-        isNew
+        fechaLanzamiento
     };
 
     try {
