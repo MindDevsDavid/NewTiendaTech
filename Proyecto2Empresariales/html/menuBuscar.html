@@ -23,6 +23,13 @@
         </div>
     </div>
 
+    <!-- Botón para listar celulares -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <button class="btn btn-success w-100" onclick="irAListar()">Listar Celulares</button>
+        </div>
+    </div>
+
     <div class="row mt-4">
         <div class="col-12">
             <button class="btn btn-secondary" onclick="volverAlMenu()">Volver al Menú Principal</button>
@@ -33,6 +40,10 @@
 <script>
     const irABuscar = (pagina) => {
         window.location.href = pagina;
+    };
+
+    const irAListar = () => {
+        window.location.href = "listar.html";
     };
 
     const volverAlMenu = () => {
