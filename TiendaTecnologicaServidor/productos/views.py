@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from .controller.controlador_tienda import ControladorTienda
 from django.views.decorators.csrf import csrf_exempt
-
+from datetime import datetime
 # Creamos un controlador en memoria.
 controlador = ControladorTienda([])
 
@@ -30,7 +30,7 @@ def create_celular(request):
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError:
-        return JsonResponse({"error": "JSON inválido"}, status=400)
+        return JsonResponse({"error": "JSON inválido. Asegurate de verificar los valores que ingresas"}, status=400)
 
     sku = data.get("sku")
     nombre = data.get("nombre")
@@ -42,19 +42,49 @@ def create_celular(request):
     fecha = data.get("fechaLanzamiento")
     is_new = data.get("is_new", True)  # Por defecto True
 
-    # Validar datos mínimos
-    if not sku or not nombre or precio is None or stock is None:
-        return JsonResponse({"error": "Campos obligatorios faltantes"}, status=400)
+    # (1) Validar obligatorios: sku, nombre, marca, precio, stock, fecha
+    if not sku or not nombre or not marca or precio is None or stock is None or not fecha:
+        return JsonResponse({"error": "Campos obligatorios faltantes (sku, nombre, marca, precio, stock o fecha)."}, status=400)
 
-    # (// NUEVO) Verificamos si ya existe un celular con ese SKU
+    # (2) Validar formato de fecha => "YYYY-MM-DD"
+    from datetime import datetime
+    try:
+        datetime.strptime(fecha, "%Y-%m-%d")  # Si no cumple, lanza ValueError
+    except ValueError:
+        return JsonResponse({"error": "Formato de fecha invalido (use YYYY-MM-DD)."}, status=400)
+    
+    try:
+        stock = int(stock)
+        if stock < 0:
+            return JsonResponse({"error": "El stock no puede ser negativo."}, status=400)
+    except ValueError:
+        return JsonResponse({"error": "Stock debe ser un numero entero valido."}, status=400)
+    
+    try:
+        capacidad = int(capacidad)
+        if capacidad < 0:
+            return JsonResponse({"error": "La capacidad no puede ser negativo."}, status=400)
+    except ValueError:
+        return JsonResponse({"error": "Capacidad debe ser un número entero valido."}, status=400)
+    
+    try:
+        precio = float(precio)
+        if precio < 0:
+            return JsonResponse({"error": "El precio no puede ser negativo."}, status=400)
+    except ValueError:
+        return JsonResponse({"error": "Precio debe ser un numero decimal valido."}, status=400)
+
+
+    # (3) Verificamos si ya existe un celular con ese SKU
     celular_existente = controlador.buscar_producto(sku)
     if celular_existente is not None:
-        # Si ya existe, retornamos un error
         return JsonResponse({"error": f"Ya existe un celular con el SKU '{sku}'"}, status=400)
-        # (Podrías usar status=409 Conflict si prefieres)
 
-    # Si no existe, procedemos a crear
-    controlador.agregar_producto(sku, nombre, descripcion, precio, stock, marca, capacidad, fecha, is_new)
+    # (4) Crear el celular
+    controlador.agregar_producto(
+        sku, nombre, descripcion, precio, stock, marca, 
+        capacidad, fecha, is_new=is_new
+    )
     return JsonResponse({"message": "Celular creado con exito"}, status=201)
 
 
@@ -141,7 +171,7 @@ def update_celular(request, sku):
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError:
-        return JsonResponse({"error": "JSON inválido"}, status=400)
+        return JsonResponse({"error": "JSON inválido. Asegurate de verificar los valores que ingresas"}, status=400)
 
     # 1. Verificar si el celular con ese SKU existe
     celular_obj = controlador.buscar_producto(sku)
