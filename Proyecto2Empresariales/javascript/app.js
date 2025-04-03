@@ -21,6 +21,7 @@ window.mostrarModal = (id) => {
         document.querySelector("#precioCelModal").value = datos[index].precio;
         document.querySelector("#fechaCelModal").value = datos[index].fecha_lanzamiento;
         document.querySelector("#capacidadCelModal").value = datos[index].capacidad;
+        document.querySelector("#is_new").value = datos[index].is_new
 
         myModal.show();
     }
@@ -100,7 +101,8 @@ const agregarCel = async (event) => {
     let marca = document.querySelector("#marcaCel").value;
     let capacidad = 1000;   
     let fecha_lanzamiento = document.querySelector("#fechaCel").value;
-    let is_new = document.querySelector("#is_new").value
+    let is_new = document.querySelector("#is_new").value === "true";
+
 
     let nuevoCelular = {
         sku,
