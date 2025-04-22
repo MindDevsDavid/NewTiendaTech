@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TechTienda.Forms.Celular;
 using TechTienda.Services;
 
 namespace TechTienda
@@ -22,17 +23,19 @@ namespace TechTienda
         }
         private void ConfigureMenu()
         {
-            // Menú Celular
-            var celularMenu = new ToolStripMenuItem("Celular");
-            celularMenu.DropDownItems.AddRange(new[] {
+            var menuCelular = new ToolStripMenuItem("Celular");
+            menuCelular.DropDownItems.AddRange(new[] {
             CreateMenuItem("Nuevo Celular", () => new AddCelular(_apiClient)),
             CreateMenuItem("Buscar Celular", () => new SearchCelular(_apiClient)),
-            // Agregar demás opciones...
-        });
+            CreateMenuItem("Listar Celulares", () => new ListCelularForm(_apiClient)),
+            });
 
-            // Menú Cargador
-            var cargadorMenu = new ToolStripMenuItem("Cargador");
-            // ... misma estructura que Celular
+            var menuCargador = new ToolStripMenuItem("Cargador");
+            //menuCargador.DropDownItems.AddRange(new[] {
+            //CreateMenuItem("Nuevo Cargador", () => new AddCargador(_apiClient)),
+            //CreateMenuItem("Buscar Cargador", () => new SearchCargador(_apiClient)),
+            //CreateMenuItem("Listar Cargadores", () => new ListCargador(_apiClient)),
+            //});
 
             // Menú Ayuda
             var ayudaMenu = new ToolStripMenuItem("Ayuda");
@@ -48,5 +51,9 @@ namespace TechTienda
             return item;
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

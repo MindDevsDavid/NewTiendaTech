@@ -37,6 +37,7 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -55,25 +56,26 @@
     <Compile Include="Forms\AboutUs.Designer.cs">
       <DependentUpon>AboutUs.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Celular\AddCelular.cs">
+    <Compile Include="Forms\CelularView\AddCelular.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Celular\AddCelular.Designer.cs">
+    <Compile Include="Forms\CelularView\AddCelular.Designer.cs">
       <DependentUpon>AddCelular.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Celular\ListCelular.cs">
+    <Compile Include="Forms\CelularView\ListCelular.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Celular\ListCelular.Designer.cs">
+    <Compile Include="Forms\CelularView\ListCelular.Designer.cs">
       <DependentUpon>ListCelular.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Celular\SearchCelular.cs">
+    <Compile Include="Forms\CelularView\SearchCelular.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Celular\SearchCelular.Designer.cs">
+    <Compile Include="Forms\CelularView\SearchCelular.Designer.cs">
       <DependentUpon>SearchCelular.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Clases.cs" />
+    <Compile Include="Models\Cargador.cs" />
+    <Compile Include="Models\Celular.cs" />
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,8 +88,14 @@
     <EmbeddedResource Include="Forms\AboutUs.resx">
       <DependentUpon>AboutUs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Celular\SearchCelular.resx">
+    <EmbeddedResource Include="Forms\CelularView\AddCelular.resx">
+      <DependentUpon>AddCelular.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CelularView\SearchCelular.resx">
       <DependentUpon>SearchCelular.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
