@@ -62,7 +62,7 @@
             this.ayudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1067, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1067, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -75,8 +75,9 @@
             this.eliminarCelularToolStripMenuItem,
             this.actualizarCelularToolStripMenuItem});
             this.celularToolStripMenuItem.Name = "celularToolStripMenuItem";
-            this.celularToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
+            this.celularToolStripMenuItem.Size = new System.Drawing.Size(69, 26);
             this.celularToolStripMenuItem.Text = "Celular";
+            this.celularToolStripMenuItem.Click += new System.EventHandler(this.celularToolStripMenuItem_Click);
             // 
             // nuevoCelularToolStripMenuItem
             // 
@@ -97,18 +98,21 @@
             this.listarCelularesToolStripMenuItem.Name = "listarCelularesToolStripMenuItem";
             this.listarCelularesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.listarCelularesToolStripMenuItem.Text = "Listar Celulares";
+            this.listarCelularesToolStripMenuItem.Click += new System.EventHandler(this.listarCelularesToolStripMenuItem_Click_1);
             // 
             // eliminarCelularToolStripMenuItem
             // 
             this.eliminarCelularToolStripMenuItem.Name = "eliminarCelularToolStripMenuItem";
             this.eliminarCelularToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.eliminarCelularToolStripMenuItem.Text = "Eliminar Celular";
+            this.eliminarCelularToolStripMenuItem.Click += new System.EventHandler(this.eliminarCelularToolStripMenuItem_Click_1);
             // 
             // actualizarCelularToolStripMenuItem
             // 
             this.actualizarCelularToolStripMenuItem.Name = "actualizarCelularToolStripMenuItem";
             this.actualizarCelularToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.actualizarCelularToolStripMenuItem.Text = "Actualizar Celular";
+            this.actualizarCelularToolStripMenuItem.Click += new System.EventHandler(this.actualizarCelularToolStripMenuItem_Click_1);
             // 
             // cargadorToolStripMenuItem
             // 
@@ -119,7 +123,7 @@
             this.eliminarCargadorToolStripMenuItem,
             this.actualizarCargadorToolStripMenuItem});
             this.cargadorToolStripMenuItem.Name = "cargadorToolStripMenuItem";
-            this.cargadorToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
+            this.cargadorToolStripMenuItem.Size = new System.Drawing.Size(85, 26);
             this.cargadorToolStripMenuItem.Text = "Cargador";
             // 
             // nuevoCargadorToolStripMenuItem
@@ -127,30 +131,35 @@
             this.nuevoCargadorToolStripMenuItem.Name = "nuevoCargadorToolStripMenuItem";
             this.nuevoCargadorToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.nuevoCargadorToolStripMenuItem.Text = "Nuevo Cargador";
+            this.nuevoCargadorToolStripMenuItem.Click += new System.EventHandler(this.nuevoCargadorToolStripMenuItem_Click_1);
             // 
             // buscarCargadorToolStripMenuItem
             // 
             this.buscarCargadorToolStripMenuItem.Name = "buscarCargadorToolStripMenuItem";
             this.buscarCargadorToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.buscarCargadorToolStripMenuItem.Text = "Buscar Cargador";
+            this.buscarCargadorToolStripMenuItem.Click += new System.EventHandler(this.buscarCargadorToolStripMenuItem_Click_1);
             // 
             // listarCargadoresToolStripMenuItem
             // 
             this.listarCargadoresToolStripMenuItem.Name = "listarCargadoresToolStripMenuItem";
             this.listarCargadoresToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.listarCargadoresToolStripMenuItem.Text = "Listar Cargadores";
+            this.listarCargadoresToolStripMenuItem.Click += new System.EventHandler(this.listarCargadoresToolStripMenuItem_Click_1);
             // 
             // eliminarCargadorToolStripMenuItem
             // 
             this.eliminarCargadorToolStripMenuItem.Name = "eliminarCargadorToolStripMenuItem";
             this.eliminarCargadorToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.eliminarCargadorToolStripMenuItem.Text = "Eliminar Cargador";
+            this.eliminarCargadorToolStripMenuItem.Click += new System.EventHandler(this.eliminarCargadorToolStripMenuItem_Click_1);
             // 
             // actualizarCargadorToolStripMenuItem
             // 
             this.actualizarCargadorToolStripMenuItem.Name = "actualizarCargadorToolStripMenuItem";
             this.actualizarCargadorToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.actualizarCargadorToolStripMenuItem.Text = "Actualizar Cargador";
+            this.actualizarCargadorToolStripMenuItem.Click += new System.EventHandler(this.actualizarCargadorToolStripMenuItem_Click_1);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -163,7 +172,7 @@
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.AcercaDeToolStripMenuItem_Click);
             // 
@@ -217,7 +226,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "TechTienda - Gestión de Inventario";
             this.Load += new System.EventHandler(this.Form1_Load);

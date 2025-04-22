@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TechTienda.Forms.Celular;
-using TechTienda.Models;
+using TechTienda.Models;    
 using TechTienda.Services;
 using TechTienda.Forms.CargadorView;
 using System.Configuration;
@@ -42,23 +42,23 @@ namespace TechTienda
             form.Show();
         }
 
-        //private void ListarCelularesToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    var form = new TechTienda.Forms.Celular.ListCelular(_apiClient);
-        //    form.Show();
-        //}
+        private void ListarCelularesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.Celular.ListCelular(_apiClient);
+            form.Show();
+        }
 
-        //private void EliminarCelularToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    var form = new TechTienda.Forms.CelularView.DeleteCelularForm(_apiClient);
-        //    form.ShowDialog();
-        //}
+        private void EliminarCelularToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.CelularView.DeleteCelularForm(_apiClient);
+            form.ShowDialog();
+        }
 
-        //private void ActualizarCelularToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    var form = new TechTienda.Forms.Celular.UpdateCelularForm(_apiClient);
-        //    form.ShowDialog();
-        //}
+        private void ActualizarCelularToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.CelularView.UpdateCelularForm(_apiClient);
+            form.ShowDialog();
+        }
 
 
         // Manejadores de eventos para Cargador
@@ -108,6 +108,59 @@ namespace TechTienda
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void celularToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listarCelularesToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.Celular.ListCelular(_apiClient);
+            form.Show();
+        }
+
+        private void eliminarCelularToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.CelularView.DeleteCelularForm(_apiClient);
+            form.Show();
+        }
+
+        private void actualizarCelularToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.CelularView.UpdateCelularForm(_apiClient);
+            form.Show();
+        }
+
+        private void nuevoCargadorToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.CargadorView.AddCargadorForm(_apiClient);
+            form.Show();
+        }
+
+        private void buscarCargadorToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.CargadorView.SearchCargadorForm(_apiClient);
+            form.Show();
+        }
+
+        private void listarCargadoresToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.CargadorView.ListCargadorForm(_apiClient);
+            form.Show();
+        }
+
+        private void eliminarCargadorToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.CargadorView.DeleteCargadorForm(_apiClient);
+            form.Show();
+        }
+
+        private void actualizarCargadorToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.CargadorView.UpdateCargadorForm(_apiClient);
+            form.Show();
         }
     }
 }

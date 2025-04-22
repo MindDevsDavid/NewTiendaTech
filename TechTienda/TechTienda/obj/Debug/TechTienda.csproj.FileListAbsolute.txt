@@ -32,3 +32,4 @@ C:\Users\Gratus\Desktop\Proyectos\empresariales\prototipo 2\NewTiendaTech\TechTi
 C:\Users\Gratus\Desktop\Proyectos\empresariales\prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.csproj.Up2Date
 C:\Users\Gratus\Desktop\Proyectos\empresariales\prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.exe
 C:\Users\Gratus\Desktop\Proyectos\empresariales\prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.pdb
+C:\Users\Gratus\Desktop\Proyectos\empresariales\prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.Forms.CelularView.UpdateCelularForm.resources

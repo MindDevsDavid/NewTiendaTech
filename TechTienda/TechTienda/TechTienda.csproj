@@ -166,6 +166,9 @@
     <EmbeddedResource Include="Forms\CelularView\SearchCelular.resx">
       <DependentUpon>SearchCelular.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CelularView\UpdateCelularForm.resx">
+      <DependentUpon>UpdateCelularForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

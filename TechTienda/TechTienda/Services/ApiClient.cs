@@ -9,6 +9,8 @@ using System.Configuration; // <-- Agrega esto
 using TechTienda.Forms.CargadorView;
 using TechTienda.Forms;
 using TechTienda.Models;
+using System.Windows.Forms;
+using TechTienda.Services;
 
 
 namespace TechTienda.Services
