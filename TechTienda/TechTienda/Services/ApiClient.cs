@@ -6,6 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Configuration; // <-- Agrega esto
+using TechTienda.Forms.CargadorView;
+using TechTienda.Forms;
+using TechTienda.Models;
+
 
 namespace TechTienda.Services
 {
@@ -27,7 +31,26 @@ namespace TechTienda.Services
         public async Task UpdateCelularAsync(TechTienda.Models.Celular celular) => await HandlePutRequest($"/celulares/{celular.Id}", celular);
         public async Task DeleteCelularAsync(int id) => await _client.DeleteAsync($"{_baseUrl}/celulares/{id}");
 
-        
+        // Método para buscar celulares
+        public async Task<List<Celular>> SearchCelularesAsync(Dictionary<string, object> criteria)
+        {
+            var queryParams = criteria.Select(kvp => $"{kvp.Key}={kvp.Value}");
+            var queryString = string.Join("&", queryParams);
+
+            var response = await _client.GetAsync($"{_baseUrl}/celulares/search?{queryString}");
+            return await HandleResponse<List<Celular>>(response);
+        }
+
+        private async Task<T> HandleResponse<T>(HttpResponseMessage response)
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(json);
+            }
+            throw new HttpRequestException($"Error: {response.StatusCode}");
+        }
+
 
         private async Task<T> HandleRequest<T>(string endpoint)
         {
@@ -57,6 +80,7 @@ namespace TechTienda.Services
             return JsonConvert.DeserializeObject<T>(json);
         }
         // Operaciones para Cargador
+
         public async Task<List<Cargador>> GetCargadoresAsync() => await HandleRequest<List<Cargador>>("/cargadores");
         public async Task<Cargador> GetCargadorByIdAsync(int id) => await HandleRequest<Cargador>($"/cargadores/{id}");
         public async Task<Cargador> CreateCargadorAsync(Cargador cargador) => await HandlePostRequest<Cargador>("/cargadores", cargador);

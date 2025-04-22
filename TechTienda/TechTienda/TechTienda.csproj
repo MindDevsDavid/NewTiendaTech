@@ -139,11 +139,29 @@
     <EmbeddedResource Include="Forms\CargadorView\AddCargadorForm.resx">
       <DependentUpon>AddCargadorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CargadorView\DeleteCargadorForm.resx">
+      <DependentUpon>DeleteCargadorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CargadorView\ListCargadorForm.resx">
+      <DependentUpon>ListCargadorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CargadorView\SearchCargadorForm.resx">
+      <DependentUpon>SearchCargadorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CargadorView\SeleccionarCargadorForm.resx">
       <DependentUpon>SeleccionarCargadorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CargadorView\UpdateCargadorForm.resx">
+      <DependentUpon>UpdateCargadorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CelularView\AddCelular.resx">
       <DependentUpon>AddCelular.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CelularView\DeleteCelularForm.resx">
+      <DependentUpon>DeleteCelularForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CelularView\ListCelular.resx">
+      <DependentUpon>ListCelular.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CelularView\SearchCelular.resx">
       <DependentUpon>SearchCelular.cs</DependentUpon>

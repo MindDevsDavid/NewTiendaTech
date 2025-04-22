@@ -13,6 +13,7 @@ using TechTienda.Services;
 using TechTienda.Forms.CargadorView;
 using System.Configuration;
 using TechTienda.Forms;
+using TechTienda.Forms.CelularView;
 
 
 
@@ -41,53 +42,54 @@ namespace TechTienda
             form.Show();
         }
 
-        private void ListarCelularesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = new TechTienda.Forms.Celular.ListCelular(_apiClient);
-            form.Show();
-        }
+        //private void ListarCelularesToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    var form = new TechTienda.Forms.Celular.ListCelular(_apiClient);
+        //    form.Show();
+        //}
 
-        private void EliminarCelularToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = new TechTienda.Forms.Celular.DeleteCelularForm(_apiClient);
-            form.ShowDialog();
-        }
+        //private void EliminarCelularToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    var form = new TechTienda.Forms.CelularView.DeleteCelularForm(_apiClient);
+        //    form.ShowDialog();
+        //}
 
-        private void ActualizarCelularToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = new TechTienda.Forms.Celular.UpdateCelularForm(_apiClient);
-            form.ShowDialog();
-        }
+        //private void ActualizarCelularToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    var form = new TechTienda.Forms.Celular.UpdateCelularForm(_apiClient);
+        //    form.ShowDialog();
+        //}
 
 
         // Manejadores de eventos para Cargador
         private void NuevoCargadorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new CargadorView.AddCargadorForm(_apiClient);
+            var form = new TechTienda.Forms.CargadorView.AddCargadorForm(_apiClient);
             form.ShowDialog();
         }
 
         private void BuscarCargadorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new CargadorView.SearchCargadorForm(_apiClient);
+            var form = new TechTienda.Forms.CargadorView.SearchCargadorForm(_apiClient);
             form.Show();
         }
 
         private void ListarCargadoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new CargadorView.ListCargadorForm(_apiClient);
+            var form = new TechTienda.Forms.CargadorView.ListCargadorForm(_apiClient);
             form.Show();
         }
 
         private void EliminarCargadorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new CargadorView.DeleteCargadorForm(_apiClient);
+            var form = new TechTienda.Forms.CargadorView.DeleteCargadorForm(_apiClient);
             form.ShowDialog();
         }
 
         private void ActualizarCargadorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new CargadorView.UpdateCargadorForm(_apiClient);
+            var form = new TechTienda.Forms.
+                CargadorView.UpdateCargadorForm(_apiClient);
             form.ShowDialog();
         }
 
@@ -99,6 +101,11 @@ namespace TechTienda
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

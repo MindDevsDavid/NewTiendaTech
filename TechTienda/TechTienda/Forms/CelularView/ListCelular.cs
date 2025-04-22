@@ -16,5 +16,10 @@ namespace TechTienda.Forms.Celular
         {
             InitializeComponent();
         }
+
+        private void ListCelular_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

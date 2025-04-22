@@ -16,5 +16,10 @@ namespace TechTienda.Forms.CelularView
         {
             InitializeComponent();
         }
+
+        private void DeleteCelularForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

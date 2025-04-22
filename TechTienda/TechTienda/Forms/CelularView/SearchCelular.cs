@@ -30,6 +30,21 @@ namespace TechTienda.Forms.Celular
             "Rango de Precios",
             "Fecha Lanzamiento"
         });
+
+            cmbCriterio.SelectedIndexChanged += CmbCriterio_SelectedIndexChanged;
+        }
+
+        private void CmbCriterio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var criterio = cmbCriterio.SelectedItem.ToString();
+
+            panelRango.Visible = (criterio == "Rango de Precios");
+            txtValor.Visible = !panelRango.Visible;
+        }
+
+        private void cmbCriterio_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
 
         private async void btnBuscar_Click(object sender, EventArgs e)
