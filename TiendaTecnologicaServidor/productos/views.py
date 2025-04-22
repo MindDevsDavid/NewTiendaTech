@@ -6,6 +6,28 @@ from django.views.decorators.http import require_http_methods
 from .controller.controlador_tienda import ControladorTienda
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
+from .model.cargador import Cargador 
+
+# ---------- Utilidades de validación para Cargador  ### NEW ----------
+def _validar_double(valor, campo):
+    try:
+        v = float(valor)
+        if v < 0:
+            raise ValueError
+        return v
+    except (ValueError, TypeError):
+        raise ValueError(f"{campo} debe ser un número decimal ≥ 0")
+
+def _validar_int(valor, campo):
+    try:
+        v = int(valor)
+        if v < 0:
+            raise ValueError
+        return v
+    except (ValueError, TypeError):
+        raise ValueError(f"{campo} debe ser un entero ≥ 0")
+    
+
 # Creamos un controlador en memoria.
 controlador = ControladorTienda([])
 
@@ -303,3 +325,153 @@ def buscar_por_rango_precio(request):
         return JsonResponse({"error": "No se encontraron celulares en ese rango de precio"}, status=404)
 
     return JsonResponse(resultado, safe=False, status=200)
+
+
+# =====================================================
+#                CRUD Cargador (detalle)       ### NEW
+# =====================================================
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def create_cargador(request, sku):
+    """
+    Crea un cargador y lo asocia al celular con el SKU dado.
+    JSON esperado:
+    {
+       "id": 1,
+       "capVoltaje": 20.5,
+       "marca": "Anker",
+       "longCable": 1.2,
+       "fechaGarantia": "2026-05-01"
+    }
+    """
+    # 1. Parsear JSON
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "JSON inválido"}, status=400)
+
+    # 2. Validar campos
+    try:
+        id_             = _validar_int   (data.get("id"),          "id")
+        cap_voltaje     = _validar_double(data.get("capVoltaje"),  "capVoltaje")
+        marca           = data.get("marca")
+        long_cable      = _validar_double(data.get("longCable"),   "longCable")
+        fecha_garantia  = data.get("fechaGarantia")
+
+        if not marca:
+            raise ValueError("marca es obligatoria")
+
+        # validar fecha
+        datetime.strptime(fecha_garantia, "%Y-%m-%d")
+
+    except ValueError as e:
+        return JsonResponse({"error": str(e)}, status=400)
+
+    # 3. Verificar que el celular exista
+    celular = controlador.buscar_producto(sku)
+    if celular is None:
+        return JsonResponse({"error": f"No existe celular con SKU '{sku}'"}, status=404)
+
+    # 4. Crear Cargador y añadirlo
+    try:
+        cargador = Cargador(id_, cap_voltaje, marca, long_cable, fecha_garantia)
+        celular.add_cargador(cargador)
+    except ValueError as e:  # id duplicado, etc.
+        return JsonResponse({"error": str(e)}, status=400)
+
+    return JsonResponse({"message": "Cargador creado"}, status=201)
+
+
+@require_http_methods(["GET"])
+def list_cargadores(request, sku):
+    """
+    GET /celulares/<sku>/cargadores
+    Soporta ?voltaje_min&voltaje_max
+    """
+    cel = controlador.buscar_producto(sku)
+    if cel is None:
+        return JsonResponse({"error": "Celular no existe"}, status=404)
+
+    vmin = request.GET.get("voltaje_min")
+    vmax = request.GET.get("voltaje_max")
+    try:
+        vmin = float(vmin) if vmin is not None else None
+        vmax = float(vmax) if vmax is not None else None
+    except ValueError:
+        return JsonResponse({"error": "voltaje_* deben ser numéricos"}, status=400)
+
+    resultado = []
+    for c in cel.listar_cargadores():
+        if vmin is not None and c.get_capVoltaje() < vmin: continue
+        if vmax is not None and c.get_capVoltaje() > vmax: continue
+        resultado.append({
+            "id":           c.get_id(),
+            "nombre":       c.get_nombre(),
+            "descripcion":  c.get_descripcion(),
+            "precio":       c.get_precio(),
+            "stock":        c.get_stock(),
+            "marca":        c.get_marca(),
+            "capVoltaje":   c.get_capVoltaje(),
+            "cableLength":  c.get_cableLength(),
+            "fechaGarantia": c.get_fechaGarantia().strftime("%Y-%m-%d"),
+            "precioConIva": c.calcularPrecio()
+        })
+    if not resultado:
+        return JsonResponse({"message": "Sin cargadores"}, status=200)
+    return JsonResponse(resultado, safe=False, status=200)
+
+@csrf_exempt
+@require_http_methods(["PUT"])
+def update_cargador(request, sku, id):
+    """
+    Actualiza un cargador asociado a un celular.
+    """
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "JSON inválido"}, status=400)
+
+    celular = controlador.buscar_producto(sku)
+    if celular is None:
+        return JsonResponse({"error": f"No existe celular con SKU '{sku}'"}, status=404)
+
+    cargador = celular.buscar_cargador(id)
+    if cargador is None:
+        return JsonResponse({"error": f"No existe cargador con id {id}"}, status=404)
+
+    # Actualizaciones parciales
+    try:
+        if "capVoltaje" in data:
+            cargador.set_capVoltaje(_validar_double(data["capVoltaje"], "capVoltaje"))
+        if "marca" in data:
+            if not data["marca"]:
+                raise ValueError("marca no puede ser vacía")
+            cargador.set_marca(data["marca"])
+        if "longCable" in data:
+            cargador.set_cableLength(_validar_double(data["longCable"], "longCable"))
+        if "fechaGarantia" in data:
+            datetime.strptime(data["fechaGarantia"], "%Y-%m-%d")
+            cargador.set_fechaGarantia(data["fechaGarantia"])
+    except ValueError as e:
+        return JsonResponse({"error": str(e)}, status=400)
+
+    return JsonResponse({"message": "Cargador actualizado"}, status=200)
+
+
+@csrf_exempt
+@require_http_methods(["DELETE"])
+def delete_cargador(request, sku, id):
+    """
+    Elimina un cargador de un celular.
+    """
+    celular = controlador.buscar_producto(sku)
+    if celular is None:
+        return JsonResponse({"error": f"No existe celular con SKU '{sku}'"}, status=404)
+
+    try:
+        celular.remove_cargador(id)
+    except ValueError as e:
+        return JsonResponse({"error": str(e)}, status=404)
+
+    return JsonResponse({"message": "Cargador eliminado"}, status=200)

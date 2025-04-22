@@ -18,7 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from productos.views import (
-    create_celular, list_celulares, update_celular, 
+    create_cargador, create_celular, delete_cargador, list_cargadores, list_celulares, update_cargador, update_celular, 
     delete_celular, buscar_por_marca, buscar_por_rango_precio, get_celular_by_sku
 )
 
@@ -34,4 +34,10 @@ urlpatterns = [
     path('celulares/buscar-por-marca', buscar_por_marca, name='buscar_marca'),     
     path('celulares/buscar-por-precio', buscar_por_rango_precio, name='buscar_precio'),
     path('celulares/<str:sku>', get_celular_by_sku, name='get_celular'),
+
+    # ---------- Rutas para Cargador  ### NEW ----------
+    path('celulares/<str:sku>/cargadores',           list_cargadores,  name='list_cargadores'),     # GET
+    path('celulares/<str:sku>/cargadores/create',    create_cargador,  name='create_cargador'),     # POST
+    path('celulares/<str:sku>/cargadores/<int:id>/update', update_cargador, name='update_cargador'),# PUT
+    path('celulares/<str:sku>/cargadores/<int:id>/delete', delete_cargador, name='delete_cargador'),# DELETE
 ]

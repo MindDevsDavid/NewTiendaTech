@@ -2,6 +2,7 @@ from datetime import datetime
 from .producto_tecnologico import ProductoTecnologico
 from ..interfaces.iencender import ICelular
 from django.utils import timezone
+from .cargador import Cargador
 
 
 class Celular(ProductoTecnologico, ICelular):
@@ -16,6 +17,7 @@ class Celular(ProductoTecnologico, ICelular):
         self.set_is_new(is_new)
         self.set_sku(sku)
         self.set_fechaRegistro(fechaRegistro)
+        self.cargadores: list[Cargador] = []
 
     def __str__(self):
         base_str = super().__str__()
@@ -142,3 +144,23 @@ class Celular(ProductoTecnologico, ICelular):
 
     def encender(self):
         print("Encendiendo celular")
+
+        # ---------- Gestión de Cargadores (detalle)  ### NEW ----------
+    def add_cargador(self, cargador: Cargador):
+        # id debe ser único dentro de este celular
+        if any(c.get_id() == cargador.get_id() for c in self.cargadores):
+            raise ValueError(f"Ya existe un cargador con id {cargador.get_id()} en este celular")
+        self.cargadores.append(cargador)
+
+    def buscar_cargador(self, id):
+        for c in self.cargadores:
+            if c.get_id() == id:
+                return c
+        return None
+
+    def remove_cargador(self, id):
+        c = self.buscar_cargador(id)
+        if c: self.cargadores.remove(c)
+
+    def listar_cargadores(self):
+        return self.cargadores.copy()

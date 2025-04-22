@@ -1,3 +1,4 @@
+from ..model.cargador import Cargador 
 from ..model.celular import Celular
 
 class ControladorTienda:
@@ -81,6 +82,47 @@ class ControladorTienda:
         """
         self.productos.remove(producto)
 
+    # ---------- CRUD Cargador  ### NEW ----------
+    def agregar_cargador(self, sku_cel, id_carg, nombre, descripcion,
+                         precio, stock, marca, capVoltaje, cableLength,
+                         fechaGarantia):
+        cel = self.buscar_producto(sku_cel)
+        if cel is None:
+            raise ValueError(f"Celular {sku_cel} no existe")
+        # unicidad del id
+        if cel.buscar_cargador(id_carg):
+            raise ValueError(f"Ya existe cargador {id_carg} en {sku_cel}")
+        carg = Cargador(id_carg, nombre, descripcion, precio, stock,
+                        marca, capVoltaje, cableLength, fechaGarantia)
+        cel.add_cargador(carg)
+
+    def buscar_cargador(self, sku_cel, id_carg):
+        cel = self.buscar_producto(sku_cel)
+        if cel:
+            return cel.buscar_cargador(id_carg)
+        return None
+
+    def actualizar_cargador(self, sku_cel, id_carg, **kwargs):
+        carg = self.buscar_cargador(sku_cel, id_carg)
+        if carg is None:
+            raise ValueError("No existe el cargador")
+        # Cada atributo es opcional
+        if 'nombre'         in kwargs and kwargs['nombre']  is not None: carg.set_nombre(kwargs['nombre'])
+        if 'descripcion'    in kwargs and kwargs['descripcion'] is not None: carg.set_descripcion(kwargs['descripcion'])
+        if 'precio'         in kwargs and kwargs['precio']   is not None: carg.set_precio(kwargs['precio'])
+        if 'stock'          in kwargs and kwargs['stock']    is not None: carg.set_stock(kwargs['stock'])
+        if 'marca'          in kwargs and kwargs['marca']    is not None: carg.set_marca(kwargs['marca'])
+        if 'capVoltaje'     in kwargs and kwargs['capVoltaje'] is not None: carg.set_capVoltaje(kwargs['capVoltaje'])
+        if 'cableLength'    in kwargs and kwargs['cableLength'] is not None: carg.set_cableLength(kwargs['cableLength'])
+        if 'fechaGarantia'  in kwargs and kwargs['fechaGarantia'] is not None: carg.set_fechaGarantia(kwargs['fechaGarantia'])
+
+    def eliminar_cargador(self, sku_cel, id_carg):
+        cel = self.buscar_producto(sku_cel)
+        if cel is None:
+            raise ValueError("Celular no existe")
+        cel.remove_cargador(id_carg)
+    
+    
     def calcular_total(self):
         """ 
         Retorna la suma de (precioCalculado * stock) de todos los productos.
