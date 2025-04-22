@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TechTienda.Services;
 using TechTienda.Models;
-using System.Configuration; // Asegúrate de tener esta referencia
+using System.Configuration;
+using TechTienda.Forms.CargadorView; 
 
 namespace TechTienda.Forms.Celular
 {

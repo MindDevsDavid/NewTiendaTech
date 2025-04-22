@@ -8,47 +8,94 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TechTienda.Forms.Celular;
+using TechTienda.Models;
 using TechTienda.Services;
+using TechTienda.Forms.CargadorView;
+using System.Configuration;
+using TechTienda.Forms;
+
+
+
 
 namespace TechTienda
 {
     public partial class Form1 : Form
     {
         private readonly ApiClient _apiClient = new ApiClient();
+
         public Form1()
         {
             InitializeComponent();
-            // Inicializar el cliente API
-            ConfigureMenu();
-        }
-        private void ConfigureMenu()
-        {
-            var menuCelular = new ToolStripMenuItem("Celular");
-            menuCelular.DropDownItems.AddRange(new[] {
-            CreateMenuItem("Nuevo Celular", () => new AddCelular(_apiClient)),
-            CreateMenuItem("Buscar Celular", () => new SearchCelular(_apiClient)),
-            CreateMenuItem("Listar Celulares", () => new ListCelularForm(_apiClient)),
-            });
-
-            var menuCargador = new ToolStripMenuItem("Cargador");
-            //menuCargador.DropDownItems.AddRange(new[] {
-            //CreateMenuItem("Nuevo Cargador", () => new AddCargador(_apiClient)),
-            //CreateMenuItem("Buscar Cargador", () => new SearchCargador(_apiClient)),
-            //CreateMenuItem("Listar Cargadores", () => new ListCargador(_apiClient)),
-            //});
-
-            // Menú Ayuda
-            var ayudaMenu = new ToolStripMenuItem("Ayuda");
-            ayudaMenu.DropDownItems.Add("Acerca de...", null, (s, e) => new AboutUs().ShowDialog());
-
-            menuStrip1.Items.AddRange(new[] { celularMenu, cargadorMenu, ayudaMenu });
         }
 
-        private ToolStripMenuItem CreateMenuItem(string text, Func<Form> formCreator)
+        // Manejadores de eventos para Celular
+        private void NuevoCelularToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var item = new ToolStripMenuItem(text);
-            item.Click += (s, e) => formCreator().Show();
-            return item;
+            var form = new TechTienda.Forms.Celular.AddCelular(_apiClient);
+            form.ShowDialog();
+        }
+
+        private void BuscarCelularToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.Celular.SearchCelular(_apiClient);
+            form.Show();
+        }
+
+        private void ListarCelularesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.Celular.ListCelular(_apiClient);
+            form.Show();
+        }
+
+        private void EliminarCelularToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.Celular.DeleteCelularForm(_apiClient);
+            form.ShowDialog();
+        }
+
+        private void ActualizarCelularToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new TechTienda.Forms.Celular.UpdateCelularForm(_apiClient);
+            form.ShowDialog();
+        }
+
+
+        // Manejadores de eventos para Cargador
+        private void NuevoCargadorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new CargadorView.AddCargadorForm(_apiClient);
+            form.ShowDialog();
+        }
+
+        private void BuscarCargadorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new CargadorView.SearchCargadorForm(_apiClient);
+            form.Show();
+        }
+
+        private void ListarCargadoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new CargadorView.ListCargadorForm(_apiClient);
+            form.Show();
+        }
+
+        private void EliminarCargadorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new CargadorView.DeleteCargadorForm(_apiClient);
+            form.ShowDialog();
+        }
+
+        private void ActualizarCargadorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new CargadorView.UpdateCargadorForm(_apiClient);
+            form.ShowDialog();
+        }
+
+
+        private void AcercaDeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new AboutUs();
+            form.ShowDialog();
         }
 
         private void Form1_Load(object sender, EventArgs e)

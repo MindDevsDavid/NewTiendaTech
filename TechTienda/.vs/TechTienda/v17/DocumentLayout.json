@@ -3,35 +3,43 @@
   "WorkspaceRootPath": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\models\\celular.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\models\\celular.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\celularview\\addcelular.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\celularview\\addcelular.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\celularview\\addcelular.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\celularview\\addcelular.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\techtienda\\services\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\services\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\celularview\\addcelular.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\celularview\\addcelular.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\models\\cargador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\models\\cargador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\techtienda\\forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\celularview\\searchcelular.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\celularview\\deletecelularform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\celularview\\deletecelularform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\celularview\\updatecelularform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\celularview\\updatecelularform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\cargadorview\\listcargadorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\cargadorview\\listcargadorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\cargadorview\\deletecargadorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\cargadorview\\deletecargadorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\cargadorview\\updatecargadorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\cargadorview\\updatecargadorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\cargadorview\\searchcargadorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\cargadorview\\searchcargadorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\celularview\\searchcelular.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\celularview\\searchcelular.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\techtienda\\forms\\celularview\\searchcelular.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\celularview\\searchcelular.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -39,12 +47,12 @@
       "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\celularview\\searchcelular.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\techtienda\\forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\aboutus.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\aboutus.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|c:\\users\\alobu\\onedrive\\desktop\\vida\\universidad\\empresariales\\prototipo 2\\newtiendatech\\techtienda\\techtienda\\forms\\aboutus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|solutionrelative:techtienda\\forms\\aboutus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C4BD3071-DF35-49E2-A916-C379973E6037}|TechTienda\\TechTienda.csproj|C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\techtienda\\forms\\aboutus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -58,101 +66,159 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Cargador.cs",
-              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Models\\Cargador.cs",
-              "RelativeDocumentMoniker": "TechTienda\\Models\\Cargador.cs",
-              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Models\\Cargador.cs",
-              "RelativeToolTip": "TechTienda\\Models\\Cargador.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T16:27:19.184Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Celular.cs",
-              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Models\\Celular.cs",
-              "RelativeDocumentMoniker": "TechTienda\\Models\\Celular.cs",
-              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Models\\Celular.cs",
-              "RelativeToolTip": "TechTienda\\Models\\Celular.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T16:26:19.645Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AddCelular.cs",
-              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\AddCelular.cs",
-              "RelativeDocumentMoniker": "TechTienda\\Forms\\CelularView\\AddCelular.cs",
-              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\AddCelular.cs",
-              "RelativeToolTip": "TechTienda\\Forms\\CelularView\\AddCelular.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHIAAAANAAAAAAAAAA==",
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\Form1.cs",
+              "RelativeDocumentMoniker": "TechTienda\\Forms\\Form1.cs",
+              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\Form1.cs",
+              "RelativeToolTip": "TechTienda\\Forms\\Form1.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAkwGEAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T16:06:45.018Z",
+              "WhenOpened": "2025-04-22T17:23:18.469Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "AddCelular.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\AddCelular.cs",
-              "RelativeDocumentMoniker": "TechTienda\\Forms\\CelularView\\AddCelular.cs",
-              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\AddCelular.cs [Dise\u00F1o]",
-              "RelativeToolTip": "TechTienda\\Forms\\CelularView\\AddCelular.cs [Dise\u00F1o]",
+              "Title": "DeleteCelularForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\DeleteCelularForm.cs",
+              "RelativeDocumentMoniker": "TechTienda\\Forms\\CelularView\\DeleteCelularForm.cs",
+              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\DeleteCelularForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "TechTienda\\Forms\\CelularView\\DeleteCelularForm.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T16:06:43.388Z",
+              "WhenOpened": "2025-04-22T17:20:39.399Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UpdateCelularForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\UpdateCelularForm.cs",
+              "RelativeDocumentMoniker": "TechTienda\\Forms\\CelularView\\UpdateCelularForm.cs",
+              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\UpdateCelularForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "TechTienda\\Forms\\CelularView\\UpdateCelularForm.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T17:20:20.899Z",
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "AddCelular.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\AddCelular.Designer.cs",
-              "RelativeDocumentMoniker": "TechTienda\\Forms\\CelularView\\AddCelular.Designer.cs",
-              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\AddCelular.Designer.cs",
-              "RelativeToolTip": "TechTienda\\Forms\\CelularView\\AddCelular.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcBAAABAAAAAAAAAA==",
+              "Title": "ListCargadorForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CargadorView\\ListCargadorForm.cs",
+              "RelativeDocumentMoniker": "TechTienda\\Forms\\CargadorView\\ListCargadorForm.cs",
+              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CargadorView\\ListCargadorForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "TechTienda\\Forms\\CargadorView\\ListCargadorForm.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T16:06:40.659Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-22T17:18:01.659Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DeleteCargadorForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CargadorView\\DeleteCargadorForm.cs",
+              "RelativeDocumentMoniker": "TechTienda\\Forms\\CargadorView\\DeleteCargadorForm.cs",
+              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CargadorView\\DeleteCargadorForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "TechTienda\\Forms\\CargadorView\\DeleteCargadorForm.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T17:17:09.365Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UpdateCargadorForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CargadorView\\UpdateCargadorForm.cs",
+              "RelativeDocumentMoniker": "TechTienda\\Forms\\CargadorView\\UpdateCargadorForm.cs",
+              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CargadorView\\UpdateCargadorForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "TechTienda\\Forms\\CargadorView\\UpdateCargadorForm.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T17:16:47.941Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\Form1.cs",
+              "RelativeDocumentMoniker": "TechTienda\\Forms\\Form1.cs",
+              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\Form1.cs [Dise\u00F1o]",
+              "RelativeToolTip": "TechTienda\\Forms\\Form1.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T17:15:34.566Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SearchCargadorForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CargadorView\\SearchCargadorForm.cs",
+              "RelativeDocumentMoniker": "TechTienda\\Forms\\CargadorView\\SearchCargadorForm.cs",
+              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CargadorView\\SearchCargadorForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "TechTienda\\Forms\\CargadorView\\SearchCargadorForm.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T17:16:31.009Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "SearchCelular.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\SearchCelular.Designer.cs",
-              "RelativeDocumentMoniker": "TechTienda\\Forms\\CelularView\\SearchCelular.Designer.cs",
-              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\SearchCelular.Designer.cs",
-              "RelativeToolTip": "TechTienda\\Forms\\CelularView\\SearchCelular.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Title": "SearchCelular.cs",
+              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\SearchCelular.cs",
+              "RelativeDocumentMoniker": "TechTienda\\Forms\\CelularView\\SearchCelular.cs",
+              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\SearchCelular.cs",
+              "RelativeToolTip": "TechTienda\\Forms\\CelularView\\SearchCelular.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T16:03:11.719Z",
+              "WhenOpened": "2025-04-22T17:15:18.994Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Program.cs",
-              "RelativeDocumentMoniker": "TechTienda\\Program.cs",
-              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Program.cs",
-              "RelativeToolTip": "TechTienda\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAOAAAAAAAAAA==",
+              "Title": "SearchCelular.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\SearchCelular.Designer.cs",
+              "RelativeDocumentMoniker": "TechTienda\\Forms\\CelularView\\SearchCelular.Designer.cs",
+              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\SearchCelular.Designer.cs",
+              "RelativeToolTip": "TechTienda\\Forms\\CelularView\\SearchCelular.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T15:48:01.965Z",
+              "WhenOpened": "2025-04-22T17:15:01.665Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AboutUs.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\AboutUs.cs",
+              "RelativeDocumentMoniker": "TechTienda\\Forms\\AboutUs.cs",
+              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\AboutUs.cs [Dise\u00F1o]",
+              "RelativeToolTip": "TechTienda\\Forms\\AboutUs.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T17:11:21.825Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 11,
+              "Title": "AboutUs.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\AboutUs.Designer.cs",
+              "RelativeDocumentMoniker": "TechTienda\\Forms\\AboutUs.Designer.cs",
+              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\AboutUs.Designer.cs",
+              "RelativeToolTip": "TechTienda\\Forms\\AboutUs.Designer.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAiwCcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T17:11:13.298Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "AboutUs.cs",
               "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\AboutUs.cs",
               "RelativeDocumentMoniker": "TechTienda\\Forms\\AboutUs.cs",
@@ -165,20 +231,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ApiClient.cs",
-              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Services\\ApiClient.cs",
-              "RelativeDocumentMoniker": "TechTienda\\Services\\ApiClient.cs",
-              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Services\\ApiClient.cs",
-              "RelativeToolTip": "TechTienda\\Services\\ApiClient.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAkwBkAAACYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T15:37:04.322Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "SearchCelular.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\CelularView\\SearchCelular.cs",
               "RelativeDocumentMoniker": "TechTienda\\Forms\\CelularView\\SearchCelular.cs",
@@ -186,31 +239,6 @@
               "RelativeToolTip": "TechTienda\\Forms\\CelularView\\SearchCelular.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-22T15:43:09.478Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\Form1.cs",
-              "RelativeDocumentMoniker": "TechTienda\\Forms\\Form1.cs",
-              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\Form1.cs",
-              "RelativeToolTip": "TechTienda\\Forms\\Form1.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAADwvxcAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T14:46:08.957Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Form1.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\Form1.cs",
-              "RelativeDocumentMoniker": "TechTienda\\Forms\\Form1.cs",
-              "ToolTip": "C:\\Users\\alobu\\OneDrive\\Desktop\\Vida\\universidad\\Empresariales\\Prototipo 2\\NewTiendaTech\\TechTienda\\TechTienda\\Forms\\Form1.cs [Dise\u00F1o]",
-              "RelativeToolTip": "TechTienda\\Forms\\Form1.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T14:44:07.519Z",
               "EditorCaption": " [Dise\u00F1o]"
             }
           ]

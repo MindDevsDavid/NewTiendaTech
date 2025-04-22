@@ -1,0 +1,10 @@
+C:\Users\alobu\OneDrive\Desktop\Vida\universidad\Empresariales\Prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.csproj.AssemblyReference.cache
+C:\Users\alobu\OneDrive\Desktop\Vida\universidad\Empresariales\Prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.Forms.AboutUs.resources
+C:\Users\alobu\OneDrive\Desktop\Vida\universidad\Empresariales\Prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.Forms.CargadorView.AddCargadorForm.resources
+C:\Users\alobu\OneDrive\Desktop\Vida\universidad\Empresariales\Prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.Forms.CargadorView.SeleccionarCargadorForm.resources
+C:\Users\alobu\OneDrive\Desktop\Vida\universidad\Empresariales\Prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.Forms.Celular.AddCelular.resources
+C:\Users\alobu\OneDrive\Desktop\Vida\universidad\Empresariales\Prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.Forms.Celular.SearchCelular.resources
+C:\Users\alobu\OneDrive\Desktop\Vida\universidad\Empresariales\Prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.Form1.resources
+C:\Users\alobu\OneDrive\Desktop\Vida\universidad\Empresariales\Prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.Properties.Resources.resources
+C:\Users\alobu\OneDrive\Desktop\Vida\universidad\Empresariales\Prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.csproj.GenerateResource.cache
+C:\Users\alobu\OneDrive\Desktop\Vida\universidad\Empresariales\Prototipo 2\NewTiendaTech\TechTienda\TechTienda\obj\Debug\TechTienda.csproj.CoreCompileInputs.cache

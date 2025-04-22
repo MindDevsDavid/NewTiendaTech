@@ -56,11 +56,53 @@
     <Compile Include="Forms\AboutUs.Designer.cs">
       <DependentUpon>AboutUs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CargadorView\AddCargadorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CargadorView\AddCargadorForm.Designer.cs">
+      <DependentUpon>AddCargadorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CargadorView\DeleteCargadorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CargadorView\DeleteCargadorForm.Designer.cs">
+      <DependentUpon>DeleteCargadorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CargadorView\ListCargadorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CargadorView\ListCargadorForm.Designer.cs">
+      <DependentUpon>ListCargadorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CargadorView\SearchCargadorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CargadorView\SearchCargadorForm.Designer.cs">
+      <DependentUpon>SearchCargadorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CargadorView\SeleccionarCargadorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CargadorView\SeleccionarCargadorForm.Designer.cs">
+      <DependentUpon>SeleccionarCargadorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CargadorView\UpdateCargadorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CargadorView\UpdateCargadorForm.Designer.cs">
+      <DependentUpon>UpdateCargadorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CelularView\AddCelular.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\CelularView\AddCelular.Designer.cs">
       <DependentUpon>AddCelular.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CelularView\DeleteCelularForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CelularView\DeleteCelularForm.Designer.cs">
+      <DependentUpon>DeleteCelularForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CelularView\ListCelular.cs">
       <SubType>Form</SubType>
@@ -73,6 +115,12 @@
     </Compile>
     <Compile Include="Forms\CelularView\SearchCelular.Designer.cs">
       <DependentUpon>SearchCelular.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CelularView\UpdateCelularForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CelularView\UpdateCelularForm.Designer.cs">
+      <DependentUpon>UpdateCelularForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Cargador.cs" />
     <Compile Include="Models\Celular.cs" />
@@ -87,6 +135,12 @@
     <Compile Include="Services\ApiClient.cs" />
     <EmbeddedResource Include="Forms\AboutUs.resx">
       <DependentUpon>AboutUs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CargadorView\AddCargadorForm.resx">
+      <DependentUpon>AddCargadorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CargadorView\SeleccionarCargadorForm.resx">
+      <DependentUpon>SeleccionarCargadorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CelularView\AddCelular.resx">
       <DependentUpon>AddCelular.cs</DependentUpon>
