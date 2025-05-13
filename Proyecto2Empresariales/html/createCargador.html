@@ -152,13 +152,14 @@
       }
 
       // Leer campos
-      const id = document.querySelector("#idCarg").value.trim();
+      const id = Number(document.querySelector("#idCarg").value.trim());
       const capVoltaje = document.querySelector("#capacidadVoltaje").value;
       const marca = document.querySelector("#marcaCarg").value.trim();
-      const largoCable = document.querySelector("#largoCable").value;
+      const longCable = document.querySelector("#largoCable").value;
       const fechaGarantia = document.querySelector("#fechaGarantia").value;
+      const sku_celular = skuActual;
 
-      const nuevoCargador = { id, capVoltaje, marca, largoCable, fechaGarantia };
+      const nuevoCargador = { id, capVoltaje, marca, longCable, fechaGarantia, sku_celular };
       const url = `http://127.0.0.1:8000/celulares/${skuActual}/cargadores/create`;
 
       console.log("Enviando POST a:", url, "payload:", nuevoCargador);
@@ -186,7 +187,7 @@
     }
 
     function volverAlMenu() {
-      window.location.href = "menuBuscar.html";
+      window.location.href = "createMenu.html";
     }
   </script>
 

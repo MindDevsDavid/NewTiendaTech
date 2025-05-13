@@ -13,13 +13,13 @@
 
     <div class="row mt-4">
         <div class="col-12 col-md-4">
-            <button class="btn btn-primary w-100" onclick="irABuscar('buscarSku.html')">Buscar por SKU</button>
+            <button class="btn btn-primary w-100" onclick="irABuscar('buscarSku.html')">Buscar celular por SKU</button>
         </div>
         <div class="col-12 col-md-4">
-            <button class="btn btn-primary w-100" onclick="irABuscar('buscarRangoPrecios.html')">Buscar por Rango de Precios</button>
+            <button class="btn btn-primary w-100" onclick="irABuscar('buscarRangoPrecios.html')">Buscar celular por Rango de Precios</button>
         </div>
         <div class="col-12 col-md-4">
-            <button class="btn btn-primary w-100" onclick="irABuscar('buscarMarca.html')">Buscar por Marca</button>
+            <button class="btn btn-primary w-100" onclick="irABuscar('buscarMarca.html')">Buscar celular por Marca</button>
         </div>
     </div>
 
@@ -29,10 +29,20 @@
             <button class="btn btn-success w-100" onclick="irAListar()">Listar Celulares</button>
         </div>
     </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <button class="btn btn-success w-100" onclick="irAListarCarg()">Listar Cargadores</button>
+        </div>
+    </div>
 
     <div class="row mt-4">
         <div class="col-12">
             <button class="btn btn-secondary" onclick="volverAlMenu()">Volver al Menú Principal</button>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 col-md-4">
+            <button class="btn btn-primary w-100" onclick="irABuscar('buscarRangoCargador.html')">Buscar cargador por rango de voltaje</button>
         </div>
     </div>
 </div>
@@ -44,6 +54,9 @@
 
     const irAListar = () => {
         window.location.href = "listar.html";
+    };
+    const irAListarCarg = () => {
+        window.location.href = "listarCargadores.html";
     };
 
     const volverAlMenu = () => {
