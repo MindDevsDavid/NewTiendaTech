@@ -764,6 +764,46 @@ def delete_cargador(request, sku, id):
     # 5) Todo OK
     return JsonResponse({"message": f"Cargador con id {id} del celular '{sku}' eliminado con éxito"}, status=200)
 
+@require_http_methods(["GET"])
+def list_all_cargadores(request):
+    """
+    GET /cargadores/all
+    Devuelve todos los registros de la tabla 'cargadores', sin filtrar por celular.
+    """
+    import traceback
+
+    # 1) Ejecutar la consulta en Supabase
+    try:
+        resp = (
+            supabase
+            .from_("cargadores")
+            .select("*")
+            .execute()
+        )
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse(
+            {"error": f"Error al conectar con la base de datos: {e}"},
+            status=500
+        )
+
+    # 2) Revisar si Supabase devolvió un error
+    error = getattr(resp, "error", None) or (
+        resp.get("error") if isinstance(resp, dict) else None
+    )
+    if error:
+        msg = getattr(error, "message", None) \
+              or (error.get("message") if isinstance(error, dict) else str(error))
+        return JsonResponse({"error": msg}, status=400)
+
+    # 3) Extraer los datos
+    data = getattr(resp, "data", None) or (
+        resp.get("data") if isinstance(resp, dict) else None
+    )
+
+    # 4) Devolver todo el arreglo (aunque esté vacío)
+    return JsonResponse(data, safe=False, status=200)
+
 
 
 
