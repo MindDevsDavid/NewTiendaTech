@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path
 from productos.views import (
     create_cargador, create_celular, delete_cargador, list_cargadores, list_celulares, update_cargador, update_celular, 
-    delete_celular, buscar_por_marca, buscar_por_rango_precio, get_celular_by_sku, custom_404
+    delete_celular, buscar_por_marca, buscar_por_rango_precio, get_celular_by_sku, custom_404, list_all_cargadores
 )
 
 handler404 = custom_404
@@ -42,4 +42,5 @@ urlpatterns = [
     path('celulares/<str:sku>/cargadores/create',    create_cargador,  name='create_cargador'),     # POST
     path('celulares/<str:sku>/cargadores/<int:id>/update', update_cargador, name='update_cargador'),# PUT
     path('celulares/<str:sku>/cargadores/<int:id>/delete', delete_cargador, name='delete_cargador'),# DELETE
+    path('cargadores',  list_all_cargadores, name="list_all_cargadores"), # MOSTRAR TODOS
 ]
