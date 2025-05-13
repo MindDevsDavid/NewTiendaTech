@@ -85,7 +85,7 @@ class ControladorTienda:
     # ---------- CRUD Cargador  ### NEW ----------
     def agregar_cargador(self, sku_cel, id_carg, nombre, descripcion,
                          precio, stock, marca, capVoltaje, cableLength,
-                         fechaGarantia):
+                         fechaGarantia, sku_celular):
         cel = self.buscar_producto(sku_cel)
         if cel is None:
             raise ValueError(f"Celular {sku_cel} no existe")
@@ -93,7 +93,7 @@ class ControladorTienda:
         if cel.buscar_cargador(id_carg):
             raise ValueError(f"Ya existe cargador {id_carg} en {sku_cel}")
         carg = Cargador(id_carg, nombre, descripcion, precio, stock,
-                        marca, capVoltaje, cableLength, fechaGarantia)
+                        marca, capVoltaje, cableLength, fechaGarantia, sku_celular)
         cel.add_cargador(carg)
 
     def buscar_cargador(self, sku_cel, id_carg):
@@ -115,7 +115,7 @@ class ControladorTienda:
         if 'capVoltaje'     in kwargs and kwargs['capVoltaje'] is not None: carg.set_capVoltaje(kwargs['capVoltaje'])
         if 'cableLength'    in kwargs and kwargs['cableLength'] is not None: carg.set_cableLength(kwargs['cableLength'])
         if 'fechaGarantia'  in kwargs and kwargs['fechaGarantia'] is not None: carg.set_fechaGarantia(kwargs['fechaGarantia'])
-
+        if  'sku_cel'       in kwargs and kwargs['sku_cel'] is not None: carg.set_sku_celular(kwargs['sku_cel'])
     def eliminar_cargador(self, sku_cel, id_carg):
         cel = self.buscar_producto(sku_cel)
         if cel is None:

@@ -1,3 +1,4 @@
+import traceback
 from django.shortcuts import render
 
 import json
@@ -7,13 +8,31 @@ from .controller.controlador_tienda import ControladorTienda
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime
 from .model.cargador import Cargador 
+from django.http import JsonResponse
+from supabase import create_client, Client
+
+
+url = 'https://aufgljqmpzaxqoyyqkwa.supabase.co'
+key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF1ZmdsanFtcHpheHFveXlxa3dhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwNzUzNDAsImV4cCI6MjA2MjY1MTM0MH0.TuBANuhMS9UfQz2OHLMkvkffEdV36TRsGLWauAQJx_4'
+supabase: Client = create_client(url, key)
+# ---------- Validacion de Url presente ----------
+
+def custom_404(request, exception):
+    return JsonResponse(
+        {"error": "La URL ingresada no pertenece a este servicio"},
+        status = 404
+
+
+
+)
 
 # ---------- Utilidades de validación para Cargador  ### NEW ----------
 def _validar_double(valor, campo):
     try:
-        v = float(valor)
-        if v < 0:
-            raise ValueError
+        v = str(valor)
+        if not isinstance(v, str) or not v.strip():
+            raise ValueError("capVoltaje debe ser una cadena no vacía")
+          
         return v
     except (ValueError, TypeError):
         raise ValueError(f"{campo} debe ser un número decimal ≥ 0")
@@ -51,8 +70,11 @@ def create_celular(request):
     """
     try:
         data = json.loads(request.body)
+        
     except json.JSONDecodeError:
         return JsonResponse({"error": "JSON inválido. Asegurate de verificar los valores que ingresas"}, status=400)
+    
+
 
     sku = data.get("sku")
     nombre = data.get("nombre")
@@ -64,9 +86,17 @@ def create_celular(request):
     fecha = data.get("fechaLanzamiento")
     is_new = data.get("is_new", True)  # Por defecto True
 
-    # (1) Validar obligatorios: sku, nombre, marca, precio, stock, fecha
+
+    ## (1) Validar obligatorios: sku, nombre, marca, precio, stock, fecha
     if not sku or not nombre or not marca or precio is None or stock is None or not fecha:
         return JsonResponse({"error": "Campos obligatorios faltantes (sku, nombre, marca, precio, stock o fecha)."}, status=400)
+
+    if isinstance(sku, int):
+        return JsonResponse({"error": "sku no puede ser un numero"}, status=400)
+
+    if isinstance(sku, float):
+        return JsonResponse({"error": "sku no puede ser un decimal"}, status=400)
+
 
     # (2) Validar formato de fecha => "YYYY-MM-DD"
     from datetime import datetime
@@ -96,18 +126,74 @@ def create_celular(request):
     except ValueError:
         return JsonResponse({"error": "Precio debe ser un numero decimal valido."}, status=400)
 
-
     # (3) Verificamos si ya existe un celular con ese SKU
     celular_existente = controlador.buscar_producto(sku)
     if celular_existente is not None:
         return JsonResponse({"error": f"Ya existe un celular con el SKU '{sku}'"}, status=400)
 
-    # (4) Crear el celular
-    controlador.agregar_producto(
-        sku, nombre, descripcion, precio, stock, marca, 
-        capacidad, fecha, is_new=is_new
-    )
-    return JsonResponse({"message": "Celular creado con exito"}, status=201)
+    # 4) Validar tipos numéricos y rangos
+    try:
+        stock = int(stock)
+        if stock < 0:
+            raise ValueError
+    except (TypeError, ValueError):
+        return JsonResponse({"error": "El campo 'stock' debe ser entero ≥ 0."}, status=400)
+
+    try:
+        capacidad = int(capacidad)
+        if capacidad < 0:
+            raise ValueError
+    except (TypeError, ValueError):
+        return JsonResponse({"error": "El campo 'capacidad' debe ser entero ≥ 0."}, status=400)
+
+    try:
+        precio = float(precio)
+        if precio < 0:
+            raise ValueError
+    except (TypeError, ValueError):
+        return JsonResponse({"error": "El campo 'precio' debe ser decimal ≥ 0."}, status=400)
+
+    # 4) Insertar en Supabase
+    payload = {
+        "sku": sku,
+        "nombre": nombre,
+        "description": descripcion,
+        "precio": precio,
+        "stock": stock,
+        "marca": marca,
+        "capacidad": capacidad,
+        "fechalanzamiento": fecha,
+        "is_new": is_new
+    }
+
+    resp = supabase.table("celulares").insert(payload).execute()
+
+    # supabase-py v1+ devuelve un APIResponse que NO tiene atributo .error, 
+    # sino que el “error” viene en el diccionario interno.
+    # Vamos a extraer primero el JSON crudo:
+    raw = None
+    if hasattr(resp, "_response"):  # si estás usando httpx bajo el capó
+        raw = resp._response.json()
+    else:
+        # si resp ya es dict-like:
+        try:
+            raw = dict(resp)
+        except Exception:
+            raw = {}
+
+    # ahora, fíjate si en raw vino un “error”
+    if raw.get("error"):
+        msg = raw["error"].get("message") or str(raw["error"])
+        return JsonResponse({"error": msg}, status=400)
+
+    # caso feliz: devolvemos la fila recién insertada
+    data = raw.get("data") or getattr(resp, "data", None)
+    if isinstance(data, list) and data:
+        return JsonResponse(data[0], status=201)
+
+    # por si acaso la forma cambió nuevamente:
+    return JsonResponse({"error": "No se obtuvo data de inserción"}, status=500)
+
 
 
 @require_http_methods(["GET"])
@@ -115,7 +201,7 @@ def list_celulares(request):
     """
     Lista todos los celulares en el controlador.
     Retorna un arreglo JSON.
-    """
+   
     if len(controlador.productos) == 0:
         return JsonResponse({"message": "Lista vacia"}, status=200)
     
@@ -142,89 +228,132 @@ def list_celulares(request):
             "precio Con Iva": prod.calcularPrecio()
         }
         resultado.append(item)
+
+
     return JsonResponse(resultado, safe=False, status=200)
+    """
+
+    
+# Fetch data from the database  
+    response = supabase.table('celulares').select('*').execute()
+    print(response.data)
+    respuesta = response.data
+    return JsonResponse( respuesta, safe=False,  status=200)
+    
+
 
 @csrf_exempt
 @require_http_methods(["GET"])
 def get_celular_by_sku(request, sku):
-    producto = controlador.buscar_producto(sku)
-    if producto is None:
-        return JsonResponse({"error": "No se encontró celular con ese SKU"}, status=404)
-    
-# Formatea la fecha para JSON si es un objeto datetime
-    fecha_registro = producto.get_fechaRegistro()
-    if hasattr(fecha_registro, 'strftime'):
-        fecha_str = fecha_registro.strftime("%Y-%m-%d %H:%M:%S %Z")
-    else:
-        fecha_str = str(fecha_registro)
-        # Convertimos el objeto a dict
+    """
+    GET /celulares/<sku>
+    Busca un celular en la tabla 'celulares' de Supabase y devuelve sus datos.
+    """
+    import traceback
 
-    # Retorna todos los atributos
-    item = {
-        "sku": producto.get_sku(),
-        "nombre": producto.get_nombre(),
-        "descripcion": producto.get_descripcion(),
-        "precio": producto.get_precio(),
-        "stock": producto.get_stock(),
-        "marca": producto.get_marca(),
-        "capacidad": producto.get_capacidad(),
-        "fechaLanzamiento": producto.get_fechaLanzamiento(),
-        "fechaRegistro": fecha_str,
-        "isNew": getattr(producto, "is_new", True),
-        "precioConIva": producto.calcularPrecio()
-    }
-    return JsonResponse(item, status=200)
+    # 1) Intentar consultar Supabase
+    try:
+        resp = supabase \
+            .from_("celulares") \
+            .select("*") \
+            .eq("sku", sku) \
+            .execute()
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse(
+            {"error": f"Error al conectar con la base de datos: {e}"},
+            status=500
+        )
+
+    # 2) Revisar si Supabase devolvió un error
+    error = getattr(resp, "error", None)
+    if error:
+        # resp.error es un objeto con .message
+        return JsonResponse({"error": error.message}, status=400)
+
+    # 3) Obtener los datos
+    data = getattr(resp, "data", None)
+    if not data:
+        return JsonResponse(
+            {"error": f"No se encontró celular con SKU '{sku}'"},
+            status=404
+        )
+
+    # 4) Devolver el primer (y único) registro encontrado
+    celular = data[0]
+    return JsonResponse(celular, status=200)
 
 @csrf_exempt
 @require_http_methods(["PUT"])
 def update_celular(request, sku):
     """
-    Actualiza un celular existente buscándolo por SKU.
-    Datos en JSON (solo lo que se desee actualizar):
-    {
-      "nombre": "Samsung S22 PLUS",
-      "precio": 3000,
-      "stock": 5,
-      "marca": "Samsung",
-      ...
-    }
-    El 'sku' no se actualiza (es inmutable).
+    Actualiza un celular existente buscándolo por SKU, usando Supabase.
+    Sólo los campos presentes en el JSON serán modificados.
     """
+    # 1) Parsear JSON
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError:
-        return JsonResponse({"error": "JSON inválido. Asegurate de verificar los valores que ingresas"}, status=400)
+        return JsonResponse(
+            {"error": "JSON inválido. Asegurate de verificar los valores que ingresas"},
+            status=400
+        )
 
-    # 1. Verificar si el celular con ese SKU existe
-    celular_obj = controlador.buscar_producto(sku)
-    if celular_obj is None:
-        return JsonResponse({"error": f"No se encontró el celular con SKU '{sku}'"}, status=404)
+    # 2) Sólo permitimos estas claves y mapeamos al nombre de columna
+    mapeo = {
+        "nombre": "nombre",
+        "description": "description",
+        "precio": "precio",
+        "stock": "stock",
+        "marca": "marca",
+        "capacidad": "capacidad",
+        "fechalanzamiento": "fechalanzamiento",
+        "is_new": "is_new"
+    }
 
-    # 2. Extraer campos a actualizar (si existen en el JSON)
-    nuevo_nombre = data.get("nombre")
-    nuevo_precio = data.get("precio")
-    nueva_descripcion = data.get("descripcion")
-    nuevo_stock = data.get("stock")
-    nueva_marca = data.get("marca")
-    nueva_capacidad = data.get("capacidad")
-    nueva_fecha_lanzamiento = data.get("fechaLanzamiento")
-    es_nuevo = data.get("is_new")
+    update_payload = {}
+    for key, col in mapeo.items():
+        if key in data:
+            update_payload[col] = data[key]
 
-    # 3. Llamar al controlador para efectuar la actualización
-    controlador.actualizar_celular(
-        sku,
-        nuevo_nombre=nuevo_nombre,
-        nuevo_precio=nuevo_precio,
-        nueva_descripcion=nueva_descripcion,
-        nuevo_stock=nuevo_stock,
-        nueva_marca=nueva_marca,
-        nueva_capacidad=nueva_capacidad,
-        nueva_fecha_lanzamiento=nueva_fecha_lanzamiento,
-        es_nuevo=es_nuevo
+    if not update_payload:
+        return JsonResponse(
+            {"error": "No hay campos para actualizar"},
+            status=400
+        )
+
+    # 3) Ejecutar el UPDATE en Supabase
+    resp = (
+        supabase
+        .table("celulares")
+        .update(update_payload)
+        .eq("sku", sku)
+        .execute()
     )
 
-    # 4. Responder éxito
-    return JsonResponse({"message": f"Celular '{sku}' actualizado."}, status=200)
+    # 4) Chequear errores (supabase-py v2.x)
+    if hasattr(resp, "error") and resp.error:
+        return JsonResponse({"error": resp.error.message}, status=400)
+
+    # 4b) En supabase-py v1.x el error viene embebido en _response:
+    if not hasattr(resp, "error") and getattr(resp, "_response", None):
+        raw = resp._response.json()
+        if raw.get("error"):
+            msg = raw["error"].get("message", str(raw["error"]))
+            return JsonResponse({"error": msg}, status=400)
+        resp_data = raw.get("data", [])
+    else:
+        resp_data = getattr(resp, "data", [])
+
+    # 5) Si no devolvió ninguna fila, es porque no existía ese SKU
+    if not resp_data:
+        return JsonResponse(
+            {"error": f"No se encontró un celular con SKU '{sku}'"},
+            status=404
+        )
+
+    # 6) Caso feliz: devolvemos la fila actualizada
+    return JsonResponse(resp_data[0], status=200)
 
 
 
@@ -232,99 +361,145 @@ def update_celular(request, sku):
 @require_http_methods(["DELETE"])
 def delete_celular(request, sku):
     """
-    Elimina un celular buscándolo por nombre.
+    Elimina un celular de la tabla 'celulares' de Supabase, buscándolo por SKU.
     """
-    producto = controlador.buscar_producto(sku)
-    if producto is None:
-        return JsonResponse({"error": "No se encontró un celular con ese SKU"}, status=404)
+    try:
+        # ejecuta DELETE ... WHERE sku = '...'
+        resp = supabase\
+            .table("celulares")\
+            .delete()\
+            .eq("sku", sku)\
+            .execute()
 
-    controlador.eliminar_producto(producto)
-    return JsonResponse({"message": f"Celular con SKU '{sku}' eliminado con éxito"}, status=200)
+        # Supabase v1+ no expone resp.error; lo leemos del JSON bruto:
+        if hasattr(resp, "_response"):
+            raw = resp._response.json()
+        else:
+            try:
+                raw = dict(resp)
+            except:
+                raw = {}
+
+        # 1) Error de Supabase
+        if raw.get("error"):
+            msg = raw["error"].get("message") or str(raw["error"])
+            return JsonResponse({"error": msg}, status=400)
+
+        # 2) filas afectadas
+        data = raw.get("data") or getattr(resp, "data", None)
+        if not data:
+            return JsonResponse(
+                {"error": f"No se encontró un celular con SKU '{sku}'"},
+                status=404
+            )
+
+        # 3) Eliminación exitosa
+        return JsonResponse(
+            {"message": f"Celular con SKU '{sku}' eliminado con éxito"},
+            status=200
+        )
+
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse({"error": str(e)}, status=500)
+
 
 
 @require_http_methods(["GET"])
 def buscar_por_marca(request):
     """
-    Ejemplo de uso: GET /celulares/buscar-por-marca?marca=Samsung
-    Retorna lista de celulares coincidientes.
+    GET /celulares/buscar-por-marca?marca=Samsung
+    Busca en Supabase los celulares cuya marca contiene el término (ILIKE).
     """
-    marca = request.GET.get("marca", None)
+    import traceback
+
+    marca = request.GET.get("marca", "").strip()
     if not marca:
-        return JsonResponse({"error": "El parámetro 'marca' es obligatorio"}, status=400)
+        return JsonResponse(
+            {"error": "El parámetro 'marca' es obligatorio"},
+            status=400
+        )
 
-    # Creamos método en el controlador (o lo definimos inline):
-    resultado = []
-    for prod in controlador.productos:
-        # Formatea la fecha para JSON si es un objeto datetime
-        fecha_registro = prod.get_fechaRegistro()
-        if hasattr(fecha_registro, 'strftime'):
-            fecha_str = fecha_registro.strftime("%Y-%m-%d %H:%M:%S %Z")
-        else:
-            fecha_str = str(fecha_registro)
-        
-        if prod.get_marca().lower() == marca.lower():
-            
-            item = {
-            "nombre": prod.get_nombre(),
-            "sku": prod.get_sku(),
-            "descripcion": prod.get_descripcion(),
-            "precio": prod.get_precio(),
-            "stock": prod.get_stock(),
-            "marca": prod.get_marca(),
-            "capacidad": prod.get_capacidad(),
-            "fechaLanzamiento": prod.get_fechaLanzamiento(),
-            "fechaRegistro": fecha_str,
-            "isNew": getattr(prod, "is_new", True),  # si no existe, asume True
-            "precio Con Iva": prod.calcularPrecio()
-        }
-            resultado.append(item)
-    if len(resultado) == 0:
-        return JsonResponse({"error": "No se encontraron celulares con esa marca"}, status=404)
+    # 1) Llamada a Supabase filtrando marca case-insensitive
+    try:
+        resp = (
+            supabase
+            .from_("celulares")
+            .select("*")
+            .ilike("marca", f"%{marca}%")
+            .execute()
+        )
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse(
+            {"error": f"Error al conectar con la base de datos: {e}"},
+            status=500
+        )
 
-    return JsonResponse(resultado, safe=False, status=200)
+    # 2) Manejo unificado de errores de Supabase
+    error = getattr(resp, "error", None) or (resp.get("error") if isinstance(resp, dict) else None)
+    if error:
+        # puede venir como objeto con .message o como dict
+        msg = getattr(error, "message", None) or (error.get("message") if isinstance(error, dict) else str(error))
+        return JsonResponse({"error": msg}, status=400)
+
+    # 3) Extraer datos
+    data = getattr(resp, "data", None) or (resp.get("data") if isinstance(resp, dict) else None)
+    if not data:
+        return JsonResponse(
+            {"error": "No se encontraron celulares con esa marca"},
+            status=404
+        )
+
+    # 4) Caso de éxito
+    return JsonResponse(data, safe=False, status=200)
 
 
 @require_http_methods(["GET"])
 def buscar_por_rango_precio(request):
     """
-    Ejemplo de uso: GET /celulares/buscar-por-precio?min=1000&max=3000
+    GET /celulares/buscar-por-precio?min=1000&max=3000
+    Filtra en Supabase los celulares cuyo precio esté entre 'min' y 'max'.
     """
+    import traceback
+
+    # 1) Validar parámetros
     try:
         minimo = float(request.GET.get("min"))
         maximo = float(request.GET.get("max"))
     except (TypeError, ValueError):
         return JsonResponse({"error": "Parámetros 'min' o 'max' inválidos o ausentes"}, status=400)
 
-    resultado = []
-    for prod in controlador.productos:
-        # Formatea la fecha para JSON si es un objeto datetime
-        fecha_registro = prod.get_fechaRegistro()
-        if hasattr(fecha_registro, 'strftime'):
-            fecha_str = fecha_registro.strftime("%Y-%m-%d %H:%M:%S %Z")
-        else:
-            fecha_str = str(fecha_registro)
-        # Convertimos el objeto a dict
-        precio_base = prod.get_precio()
-        if minimo <= precio_base <= maximo:
-            item = {
-            "nombre": prod.get_nombre(),
-            "sku": prod.get_sku(),
-            "descripcion": prod.get_descripcion(),
-            "precio": prod.get_precio(),
-            "stock": prod.get_stock(),
-            "marca": prod.get_marca(),
-            "capacidad": prod.get_capacidad(),
-            "fechaLanzamiento": prod.get_fechaLanzamiento(),
-            "fechaRegistro": fecha_str,
-            "isNew": getattr(prod, "is_new", True),  # si no existe, asume True
-            "precio Con Iva": prod.calcularPrecio()
-        }
-            resultado.append(item)
+    # 2) Ejecutar consulta en Supabase
+    try:
+        resp = (
+            supabase
+            .from_("celulares")
+            .select("*")
+            .gte("precio", minimo)
+            .lte("precio", maximo)
+            .execute()
+        )
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse(
+            {"error": f"Error al conectar con la base de datos: {e}"},
+            status=500
+        )
 
-    if not resultado:
+    # 3) Manejar posible error devuelto por Supabase
+    error = getattr(resp, "error", None) or (resp.get("error") if isinstance(resp, dict) else None)
+    if error:
+        msg = getattr(error, "message", None) or (error.get("message") if isinstance(error, dict) else str(error))
+        return JsonResponse({"error": msg}, status=400)
+
+    # 4) Extraer los datos y comprobar si hay resultados
+    data = getattr(resp, "data", None) or (resp.get("data") if isinstance(resp, dict) else None)
+    if not data:
         return JsonResponse({"error": "No se encontraron celulares en ese rango de precio"}, status=404)
 
-    return JsonResponse(resultado, safe=False, status=200)
+    # 5) Devolver la lista filtrada
+    return JsonResponse(data, safe=False, status=200)
 
 
 # =====================================================
@@ -339,139 +514,259 @@ def create_cargador(request, sku):
     JSON esperado:
     {
        "id": 1,
-       "capVoltaje": 20.5,
+       "capVoltaje": "20V",
        "marca": "Anker",
        "longCable": 1.2,
        "fechaGarantia": "2026-05-01"
     }
     """
-    # 1. Parsear JSON
+    # 1) Parsear JSON
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError:
         return JsonResponse({"error": "JSON inválido"}, status=400)
 
-    # 2. Validar campos
+    # 2) Validaciones básicas
+    #   – id
+    id_ = data.get("id")
+    if id_ is None or not isinstance(id_, int) or id_ < 0:
+        return JsonResponse({"error": "El campo 'id' es obligatorio y debe ser un entero ≥ 0"}, status=400)
+    #   – capVoltaje (ahora string)
+    capV = data.get("capVoltaje")
+    if not capV or not isinstance(capV, str):
+        return JsonResponse({"error": "El campo 'capVoltaje' es obligatorio y debe ser texto"}, status=400)
+    #   – marca
+    if not data.get("marca"):
+        return JsonResponse({"error": "El campo 'marca' es obligatorio"}, status=400)
+    #   – longCable
+    longC = data.get("longCable")
     try:
-        id_             = _validar_int   (data.get("id"),          "id")
-        cap_voltaje     = _validar_double(data.get("capVoltaje"),  "capVoltaje")
-        marca           = data.get("marca")
-        long_cable      = _validar_double(data.get("longCable"),   "longCable")
-        fecha_garantia  = data.get("fechaGarantia")
-
-        if not marca:
-            raise ValueError("marca es obligatoria")
-
-        # validar fecha
-        datetime.strptime(fecha_garantia, "%Y-%m-%d")
-
-    except ValueError as e:
-        return JsonResponse({"error": str(e)}, status=400)
-
-    # 3. Verificar que el celular exista
-    celular = controlador.buscar_producto(sku)
-    if celular is None:
-        return JsonResponse({"error": f"No existe celular con SKU '{sku}'"}, status=404)
-
-    # 4. Crear Cargador y añadirlo
+        longC = float(longC)
+        if longC < 0:
+            raise ValueError
+    except Exception:
+        return JsonResponse({"error": "El campo 'longCable' debe ser un número ≥ 0"}, status=400)
+    #   – fechaGarantia
+    fecha = data.get("fechaGarantia")
     try:
-        cargador = Cargador(id_, cap_voltaje, marca, long_cable, fecha_garantia)
-        celular.add_cargador(cargador)
-    except ValueError as e:  # id duplicado, etc.
-        return JsonResponse({"error": str(e)}, status=400)
+        datetime.strptime(fecha, "%Y-%m-%d")
+    except Exception:
+        return JsonResponse({"error": "El campo 'fechaGarantia' debe usar formato YYYY-MM-DD"}, status=400)
 
-    return JsonResponse({"message": "Cargador creado"}, status=201)
+    # 3) Payload que vamos a insertar
+    payload = {
+        "sku_celular": sku,
+        "id_": id_,
+        "capvoltaje": capV,
+        "marca": data["marca"],
+        "cablelength": longC,
+        "fechagarantia": fecha
+    }
+
+    # 4) Insertar en Supabase
+    try:
+        resp = supabase.from_("cargadores").insert(payload).execute()
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse(
+            {"error": f"Error de conexión con la base de datos: {str(e)}"},
+            status=500
+        )
+
+    # 5) Revisar si Supabase devolvió error en la respuesta
+    error = getattr(resp, "error", None) or (resp.get("error") if isinstance(resp, dict) else None)
+    if error:
+        msg = getattr(error, "message", None) or (error.get("message") if isinstance(error, dict) else str(error))
+        return JsonResponse({"error": msg}, status=400)
+
+    # 6) Devolver el registro recién creado
+    data_created = getattr(resp, "data", None) or (resp.get("data") if isinstance(resp, dict) else None)
+    if not data_created:
+        return JsonResponse({"error": "No se pudo crear el cargador"}, status=500)
+
+    creado = data_created[0] if isinstance(data_created, list) else data_created
+    return JsonResponse(creado, status=201)
+
+
 
 
 @require_http_methods(["GET"])
 def list_cargadores(request, sku):
     """
     GET /celulares/<sku>/cargadores
-    Soporta ?voltaje_min&voltaje_max
+    Soporta filtros: ?voltaje_min&voltaje_max
     """
-    cel = controlador.buscar_producto(sku)
-    if cel is None:
-        return JsonResponse({"error": "Celular no existe"}, status=404)
+    import traceback
+    # 1) Verificar que el celular existe en la tabla "celulares"
+    try:
+        resp_c = (
+            supabase
+            .from_("celulares")
+            .select("sku")
+            .eq("sku", sku)
+            .execute()
+        )
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse(
+            {"error": f"Error de conexión a la base de datos: {str(e)}"},
+            status=500
+        )
 
+    #  → Si no existe el celular, devolvemos 404
+    if not getattr(resp_c, "data", None):
+        return JsonResponse(
+            {"error": f"No existe un celular con SKU '{sku}'"},
+            status=404
+        )
+
+    # 2) Construir la consulta a "cargadores" con filtros opcionales
     vmin = request.GET.get("voltaje_min")
     vmax = request.GET.get("voltaje_max")
     try:
-        vmin = float(vmin) if vmin is not None else None
-        vmax = float(vmax) if vmax is not None else None
+        query = supabase.from_("cargadores").select("*").eq("sku_celular", sku)
+        if vmin is not None:
+            query = query.gte("capvoltaje", float(vmin))
+        if vmax is not None:
+            query = query.lte("capvoltaje", float(vmax))
+        resp = query.execute()
     except ValueError:
         return JsonResponse({"error": "voltaje_* deben ser numéricos"}, status=400)
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse(
+            {"error": f"Error al consultar cargadores: {str(e)}"},
+            status=500
+        )
 
-    resultado = []
-    for c in cel.listar_cargadores():
-        if vmin is not None and c.get_capVoltaje() < vmin: continue
-        if vmax is not None and c.get_capVoltaje() > vmax: continue
-        resultado.append({
-            "id":           c.get_id(),
-            "nombre":       c.get_nombre(),
-            "descripcion":  c.get_descripcion(),
-            "precio":       c.get_precio(),
-            "stock":        c.get_stock(),
-            "marca":        c.get_marca(),
-            "capVoltaje":   c.get_capVoltaje(),
-            "cableLength":  c.get_cableLength(),
-            "fechaGarantia": c.get_fechaGarantia().strftime("%Y-%m-%d"),
-            "precioConIva": c.calcularPrecio()
-        })
-    if not resultado:
+    # 3) Verificar errores de Supabase en la consulta de cargadores
+    error = getattr(resp, "error", None)
+    if error:
+        return JsonResponse({"error": error.message}, status=400)
+
+    # 4) Si no hay cargadores asociados
+    if not getattr(resp, "data", None):
         return JsonResponse({"message": "Sin cargadores"}, status=200)
-    return JsonResponse(resultado, safe=False, status=200)
+
+    # 5) Devolver el array tal cual viene de la base
+    return JsonResponse(resp.data, safe=False, status=200)
 
 @csrf_exempt
 @require_http_methods(["PUT"])
 def update_cargador(request, sku, id):
     """
-    Actualiza un cargador asociado a un celular.
+    Actualiza un cargador en la tabla 'cargadores' filtrando por sku_celular e id.
     """
+    import traceback
+
+    # 1) Parsear JSON
     try:
         data = json.loads(request.body)
     except json.JSONDecodeError:
         return JsonResponse({"error": "JSON inválido"}, status=400)
 
-    celular = controlador.buscar_producto(sku)
-    if celular is None:
+    # 2) No permitimos modificar la clave primaria
+    if "id" in data or "sku_celular" in data:
+        return JsonResponse({"error": "No se puede actualizar 'id' ni 'sku_celular'"}, status=400)
+
+    # 3) Validar que el celular maestro exista
+    try:
+        resp_c = (
+            supabase
+            .from_("celulares")
+            .select("sku")
+            .eq("sku", sku)
+            .execute()
+        )
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse({"error": f"Error al conectar con la DB de celulares: {e}"}, status=500)
+
+    if not getattr(resp_c, "data", None):
         return JsonResponse({"error": f"No existe celular con SKU '{sku}'"}, status=404)
 
-    cargador = celular.buscar_cargador(id)
-    if cargador is None:
-        return JsonResponse({"error": f"No existe cargador con id {id}"}, status=404)
-
-    # Actualizaciones parciales
+    # 4) Ejecutar el UPDATE en Supabase
     try:
-        if "capVoltaje" in data:
-            cargador.set_capVoltaje(_validar_double(data["capVoltaje"], "capVoltaje"))
-        if "marca" in data:
-            if not data["marca"]:
-                raise ValueError("marca no puede ser vacía")
-            cargador.set_marca(data["marca"])
-        if "longCable" in data:
-            cargador.set_cableLength(_validar_double(data["longCable"], "longCable"))
-        if "fechaGarantia" in data:
-            datetime.strptime(data["fechaGarantia"], "%Y-%m-%d")
-            cargador.set_fechaGarantia(data["fechaGarantia"])
-    except ValueError as e:
-        return JsonResponse({"error": str(e)}, status=400)
+        resp = (
+            supabase
+            .from_("cargadores")
+            .update(data)
+            .eq("sku_celular", sku)
+            .eq("id_", id)
+            .execute()
+        )
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse({"error": f"Error al conectar con la DB de cargadores: {e}"}, status=500)
 
-    return JsonResponse({"message": "Cargador actualizado"}, status=200)
+    # 5) Chequear respuesta de Supabase
+    error = getattr(resp, "error", None)
+    if error:
+        return JsonResponse({"error": error.message}, status=400)
+
+    updated = getattr(resp, "data", None)
+    if not updated:
+        return JsonResponse({"error": f"No se encontró un cargador con id {id} para el SKU '{sku}'"}, status=404)
+
+    # 6) Retornar el registro actualizado
+    return JsonResponse(updated[0], status=200) 
 
 
 @csrf_exempt
 @require_http_methods(["DELETE"])
 def delete_cargador(request, sku, id):
     """
-    Elimina un cargador de un celular.
+    Elimina un cargador de la tabla 'cargadores' filtrando por sku_celular e id.
     """
-    celular = controlador.buscar_producto(sku)
-    if celular is None:
+    import traceback
+
+    # 1) Verificar que el celular maestro exista
+    try:
+        resp_c = (
+            supabase
+            .from_("celulares")
+            .select("sku")
+            .eq("sku", sku)
+            .execute()
+        )
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse({"error": f"Error al conectar con la DB de celulares: {e}"}, status=500)
+
+    # Si no existe ese SKU en 'celulares'
+    if not getattr(resp_c, "data", None):
         return JsonResponse({"error": f"No existe celular con SKU '{sku}'"}, status=404)
 
+    # 2) Intentar borrar el cargador
     try:
-        celular.remove_cargador(id)
-    except ValueError as e:
-        return JsonResponse({"error": str(e)}, status=404)
+        resp = (
+            supabase
+            .from_("cargadores")
+            .delete()
+            .eq("sku_celular", sku)
+            .eq("id_", id)
+            .execute()
+        )
+    except Exception as e:
+        traceback.print_exc()
+        return JsonResponse({"error": f"Error al conectar con la DB de cargadores: {e}"}, status=500)
 
-    return JsonResponse({"message": "Cargador eliminado"}, status=200)
+    # 3) Revisar si Supabase devolvió un error
+    error = getattr(resp, "error", None)
+    if error:
+        return JsonResponse({"error": error.message}, status=400)
+
+    # 4) Si no afectó filas, ese cargador no existe
+    deleted = getattr(resp, "data", None)
+    if not deleted:
+        return JsonResponse({"error": f"No se encontró un cargador con id {id} para el SKU '{sku}'"}, status=404)
+
+    # 5) Todo OK
+    return JsonResponse({"message": f"Cargador con id {id} del celular '{sku}' eliminado con éxito"}, status=200)
+
+
+
+
+
+
+

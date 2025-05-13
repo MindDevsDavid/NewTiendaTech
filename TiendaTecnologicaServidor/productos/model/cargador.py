@@ -27,6 +27,7 @@ class Cargador(ProductoTecnologico):
         descripcion: str = "Cargador estándar",
         precio: float = 0.0,
         stock: int = 0,
+        sku_celular = str,
     ):
         super().__init__(nombre, descripcion, precio, stock, marca)
 
@@ -34,6 +35,7 @@ class Cargador(ProductoTecnologico):
         self.set_capVoltaje(capVoltaje)
         self.set_cableLength(cableLength)
         self.set_fechaGarantia(fechaGarantia)
+        self.set_sku_celular(sku_celular)
 
     # ----------- getters obligatorios (heredados) -----------
     def get_nombre(self):        return self.nombre
@@ -83,6 +85,20 @@ class Cargador(ProductoTecnologico):
         if not isinstance(f, date):
             raise ValueError("fechaGarantia debe ser date o str YYYY‑MM‑DD")
         self.fechaGarantia = f
+
+    def get_sku_celular(self): return self.sku_celular
+    
+    def set_sku_celular(self, sku_celular ):  
+        if isinstance(sku_celular, str):
+            self.sku_celular = sku_celular
+        
+            
+        
+        
+
+        # if not isinstance(self.get_sku_celular, str) or not self.get_sku_celular:
+        #    raise ValueError("El campo 'sku_celular debe ser una cadena de caracteres no vacia'")
+        #self.sku_celular = sku_celular
 
     # ----------- lógica de negocio --------------------------
     def calcularPrecio(self):

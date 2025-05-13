@@ -19,8 +19,10 @@ from django.contrib import admin
 from django.urls import path
 from productos.views import (
     create_cargador, create_celular, delete_cargador, list_cargadores, list_celulares, update_cargador, update_celular, 
-    delete_celular, buscar_por_marca, buscar_por_rango_precio, get_celular_by_sku
+    delete_celular, buscar_por_marca, buscar_por_rango_precio, get_celular_by_sku, custom_404
 )
+
+handler404 = custom_404
 
 urlpatterns = [
     path("admin/", admin.site.urls),
