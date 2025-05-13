@@ -98,7 +98,7 @@ const agregarCel = async (event) => {
     let precio = document.querySelector("#precioCel").value;
     let stock = document.querySelector("#stockCel").value;
     let marca = document.querySelector("#marcaCel").value;
-    let capacidad = 1000;   
+    let capacidad = document.querySelector("#capacidadCel").value;   
     let fecha_lanzamiento = document.querySelector("#fechaCel").value;
 
 
