@@ -1,4 +1,0 @@
-/*  sobrescribe lo mínimo de Bootstrap  */
-body      { background:#f9fafb; }
-main      { max-width:900px;margin:auto }
-table th  { white-space:nowrap }
