@@ -95,7 +95,8 @@
         }
 
         try {
-            let response = await fetch(`http://127.0.0.1:8000/celulares/6/cargadores?voltaje_min=${precioMin}&voltaje_max=${precioMax}`);
+            //http://127.0.0.1:8000/celulares/6/cargadores?voltaje_min=${precioMin}&voltaje_max=${precioMax}
+            let response = await fetch(`http://127.0.0.1:8000/celulares/IPHONE-13/cargadores?voltaje_min=${precioMin}&voltaje_max=${precioMax}`);
             let data = await response.json();
 
             console.log("Respuesta del servidor:", data); // Depuración
