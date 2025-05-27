@@ -61,7 +61,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Fecha de lanzamiento</label>
-                    <input type="text" class="form-control" id="fechaLanzamiento">
+                    <input type="date" class="form-control" id="fechaLanzamiento">
                 </div>
                
                 <button type="submit" class="btn btn-success w-100">Actualizar</button>
@@ -78,7 +78,7 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
         document.querySelector("#btnBuscar").addEventListener("click", buscarCelular);
         document.querySelector("#formActualizar").addEventListener("submit", updateCelular);
     });
@@ -111,12 +111,12 @@
 
                 // Llenar el formulario con los datos del celular
                 document.querySelector("#nombre").value = data.nombre;
-                document.querySelector("#descripcion").value = data.descripcion;
+                document.querySelector("#descripcion").value = data.description;
                 document.querySelector("#precio").value = data.precio;
                 document.querySelector("#stock").value = data.stock;
                 document.querySelector("#marca").value = data.marca;
                 document.querySelector("#capacidad").value = data.capacidad;
-                document.querySelector("#fechaLanzamiento").value = data.fechaLanzamiento;
+                document.querySelector("#fechaLanzamiento").value = data.fechalanzamiento;
                 
 
                 contenedorFormulario.style.display = "block"; // Mostrar formulario
@@ -153,12 +153,12 @@
     let celularActualizado = {
         sku: skuActual,  // Usa el SKU obtenido en la búsqueda
         nombre,
-        descripcion,
+        description: descripcion,
         precio: parseFloat(precio),
         stock: parseInt(stock),
         marca,
         capacidad: parseInt(capacidad),  // Asegura que sea un número
-        fechaLanzamiento
+        fechalanzamiento: fechaLanzamiento
     };
 
     try {

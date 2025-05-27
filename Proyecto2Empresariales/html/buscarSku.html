@@ -31,26 +31,41 @@
     </div>
 
     <!-- Tabla de celulares -->
-    <div class="row mt-3" id="contenedor-tabla" style="display: none;">
+    <div class="row mt-3" id="contenedor-formulario" style="display: none;">
         <div class="col-12">
             <h3>Resultado de la búsqueda</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Sku</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Precio</th>
-                        <th>Stock</th>
-                        <th>Marca</th>
-                        <th>Capacidad</th>
-                        <th>Fecha de lanzamiento</th>
-                    </tr>
-                </thead>
-                <tbody id="cuerpo-tabla">
-                    <!-- Celular filtrado se insertará aquí -->
-                </tbody>
-            </table>
+            <form id="formActualizar">
+                <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Descripción</label>
+                    <input type="text" class="form-control" id="descripcion">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Precio</label>
+                    <input type="number" class="form-control" id="precio">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Stock</label>
+                    <input type="number" class="form-control" id="stock">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Marca</label>
+                    <input type="text" class="form-control" id="marca">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Capacidad</label>
+                    <input type="number" class="form-control" id="capacidad">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Fecha de lanzamiento</label>
+                    <input type="date" class="form-control" id="fechaLanzamiento">
+                </div>
+               
+                <button type="submit" class="btn btn-success w-100">Actualizar</button>
+            </form>
         </div>
     </div>
 
@@ -65,18 +80,19 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelector("#btnBuscar").addEventListener("click", buscarCelular);
+        document.querySelector("#formActualizar").addEventListener("submit", updateCelular);
     });
+
+    let skuActual = "";
 
     const buscarCelular = async () => {
         let sku = document.querySelector("#buscarSku").value.trim();
         let mensajeError = document.querySelector("#mensaje-error");
-        let contenedorTabla = document.querySelector("#contenedor-tabla");
-        let cuerpoTabla = document.querySelector("#cuerpo-tabla");
+        let contenedorFormulario = document.querySelector("#contenedor-formulario");
 
-        // Limpiar la tabla y el mensaje antes de la búsqueda
-        cuerpoTabla.innerHTML = "";
+        // Limpiar el mensaje antes de la búsqueda
         mensajeError.style.display = "none";
-        contenedorTabla.style.display = "none";
+        contenedorFormulario.style.display = "none";
 
         if (!sku) {
             alert("Por favor, ingrese un SKU.");
@@ -87,27 +103,23 @@
             let response = await fetch(`http://127.0.0.1:8000/celulares/${sku}`);
             let data = await response.json();
 
-            console.log("Respuesta del servidor:", data); // Depuración
+            console.log("Respuesta del servidor:", data);
 
             if (response.ok) {
-                // Se encontró el celular
-                const fila = document.createElement("tr");
+                // Guardar SKU actual
+                skuActual = sku;
 
-                fila.innerHTML = `
-                    <td>${data.sku}</td>
-                    <td>${data.nombre}</td>
-                    <td>${data.descripcion}</td>
-                    <td>${data.precio}</td>
-                    <td>${data.stock}</td>
-                    <td>${data.marca}</td>
-                    <td>${data.capacidad}</td>
-                    <td>${data.fechaLanzamiento}</td>
-                    
-                `;
+                // Llenar el formulario con los datos del celular
+                document.querySelector("#nombre").value = data.nombre;
+                document.querySelector("#descripcion").value = data.description;
+                document.querySelector("#precio").value = data.precio;
+                document.querySelector("#stock").value = data.stock;
+                document.querySelector("#marca").value = data.marca;
+                document.querySelector("#capacidad").value = data.capacidad;
+                document.querySelector("#fechaLanzamiento").value = data.fechalanzamiento;
+                
 
-                cuerpoTabla.appendChild(fila);
-                contenedorTabla.style.display = "block"; // Mostrar la tabla con los datos
-
+                contenedorFormulario.style.display = "block"; // Mostrar formulario
             } else {
                 // El SKU no existe
                 mensajeError.textContent = "No se encontró un celular con ese SKU.";

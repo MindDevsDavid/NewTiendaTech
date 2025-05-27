@@ -68,7 +68,7 @@
         contenedorTabla.style.display = "none";
 
         try {
-            let response = await fetch("http://127.0.0.1:8000/celulares/6/cargadores?voltaje_min=0&voltaje_max=1000000");
+            let response = await fetch("http://127.0.0.1:8000/cargadores");
             let celulares = await response.json();
 
             console.log("Celulares recibidos:", celulares); // Para depuración
